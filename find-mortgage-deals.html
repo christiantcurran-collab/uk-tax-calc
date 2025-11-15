@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Find the best mortgage deals in the UK. Compare rates from top lenders across fixed, tracker, and variable mortgages.">
+    <meta name="description" content="Find the best mortgage deals in the UK. Compare rates from top lenders with personalized monthly payment calculations.">
     
-    <title>Find a Top Mortgage Deal | QuidsIn</title>
+    <title>Find a Top Mortgage Deal | Quids In</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -15,8 +15,8 @@
         <div class="nav-container">
             <a href="index.html" class="logo-link">
                 <div class="quidsin-logo">
-                    <div class="logo-icon">£</div>
-                    <span class="logo-text">QuidsIn</span>
+                    <span class="logo-text">Quids In</span>
+                    <span class="logo-tagline">Your comprehensive UK personal finance and comparison site</span>
                 </div>
             </a>
             
@@ -58,426 +58,113 @@
         </div>
     </nav>
 
-    <div class="container">
-        <header>
-            <h1><i class="fas fa-search-dollar"></i> Find a Top Mortgage Deal</h1>
-            <p class="subtitle">Compare the best mortgage rates across the UK market</p>
-        </header>
-
-        <div class="calculator-card">
-            <div class="info-box">
-                <i class="fas fa-clock"></i>
-                <p><strong>Rates updated regularly</strong> - Last update: November 2025. Bank of England base rate: 4.75%. Rates shown are indicative and subject to change. Always check with lenders directly.</p>
-            </div>
-
-            <!-- Filter Section -->
-            <div class="form-section">
-                <div class="section-header">
-                    <i class="fas fa-filter section-icon"></i>
-                    <h2>Filter Deals</h2>
-                </div>
-
+    <div class="mortgage-finder-container">
+        <!-- LEFT SIDEBAR: Search Criteria -->
+        <aside class="search-sidebar">
+            <h2><i class="fas fa-search"></i> What are you looking for?</h2>
+            
+            <form id="mortgageSearchForm">
                 <div class="input-group">
-                    <label for="dealType"><i class="fas fa-list"></i> Deal Type</label>
-                    <select id="dealType" class="select-input">
-                        <option value="all">All Deals</option>
-                        <option value="fixed">Fixed Rate</option>
-                        <option value="tracker">Tracker</option>
-                        <option value="variable">Variable</option>
-                    </select>
+                    <label for="propertyValue"><i class="fas fa-home"></i> Property Value</label>
+                    <div class="input-with-symbol">
+                        <span class="currency-symbol">£</span>
+                        <input type="number" id="propertyValue" value="280000" min="10000" step="1000" required>
+                    </div>
                 </div>
-
-                <div class="input-group">
-                    <label for="ltvFilter"><i class="fas fa-percentage"></i> Loan-to-Value (LTV)</label>
-                    <select id="ltvFilter" class="select-input">
-                        <option value="all">All LTV Ratios</option>
-                        <option value="60">Up to 60% LTV</option>
-                        <option value="75">Up to 75% LTV</option>
-                        <option value="80">Up to 80% LTV</option>
-                        <option value="85">Up to 85% LTV</option>
-                        <option value="90">Up to 90% LTV</option>
-                        <option value="95">Up to 95% LTV</option>
-                    </select>
-                </div>
-
-                <div class="input-group">
-                    <label for="termFilter"><i class="fas fa-calendar-alt"></i> Fixed Term Length</label>
-                    <select id="termFilter" class="select-input">
-                        <option value="all">All Terms</option>
-                        <option value="2">2 Year Fixed</option>
-                        <option value="3">3 Year Fixed</option>
-                        <option value="5">5 Year Fixed</option>
-                        <option value="10">10 Year Fixed</option>
-                    </select>
-                </div>
-
-                <button onclick="filterDeals()" class="calculate-btn">
-                    <i class="fas fa-filter"></i> Apply Filters
-                </button>
-            </div>
-        </div>
-
-        <!-- Best Deals Summary -->
-        <div class="calculator-card">
-            <div class="section-header">
-                <i class="fas fa-star section-icon"></i>
-                <h2>Best Deals Right Now</h2>
-            </div>
-
-            <div class="tips-grid">
-                <div class="tip-card">
-                    <i class="fas fa-trophy"></i>
-                    <h3>Lowest 2-Year Fixed</h3>
-                    <p class="highlight-rate" style="font-size: 2rem; color: var(--primary-color); margin: 0.5rem 0;">3.64%</p>
-                    <p><strong>Nationwide</strong><br>60% LTV • £999 fee</p>
-                </div>
-                <div class="tip-card">
-                    <i class="fas fa-trophy"></i>
-                    <h3>Lowest 5-Year Fixed</h3>
-                    <p class="highlight-rate" style="font-size: 2rem; color: var(--primary-color); margin: 0.5rem 0;">4.09%</p>
-                    <p><strong>HSBC</strong><br>60% LTV • £999 fee</p>
-                </div>
-                <div class="tip-card">
-                    <i class="fas fa-trophy"></i>
-                    <h3>Best First-Time Buyer</h3>
-                    <p class="highlight-rate" style="font-size: 2rem; color: var(--primary-color); margin: 0.5rem 0;">5.19%</p>
-                    <p><strong>Nationwide</strong><br>95% LTV • 5 Year Fixed</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- 2 Year Fixed Rates -->
-        <div class="calculator-card">
-            <div class="section-header">
-                <i class="fas fa-calendar section-icon"></i>
-                <h2>2 Year Fixed Rate Mortgages</h2>
-            </div>
-
-            <div class="rates-table">
-                <table class="comparison-table" id="twoYearTable">
-                    <thead>
-                        <tr>
-                            <th>Lender</th>
-                            <th>Rate</th>
-                            <th>LTV</th>
-                            <th>Product Fee</th>
-                            <th>APRC</th>
-                            <th>Features</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Nationwide</strong></td>
-                            <td class="highlight-rate">3.64%</td>
-                            <td>60%</td>
-                            <td>£999</td>
-                            <td>4.7%</td>
-                            <td>Free valuation, £250 cashback</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Santander</strong></td>
-                            <td class="highlight-rate">3.81%</td>
-                            <td>75%</td>
-                            <td>£999</td>
-                            <td>4.8%</td>
-                            <td>Free valuation</td>
-                        </tr>
-                        <tr>
-                            <td><strong>HSBC</strong></td>
-                            <td class="highlight-rate">3.89%</td>
-                            <td>60%</td>
-                            <td>£999</td>
-                            <td>4.9%</td>
-                            <td>Free valuation, £500 cashback</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Barclays</strong></td>
-                            <td class="highlight-rate">3.94%</td>
-                            <td>75%</td>
-                            <td>£999</td>
-                            <td>5.0%</td>
-                            <td>Free valuation</td>
-                        </tr>
-                        <tr>
-                            <td><strong>NatWest</strong></td>
-                            <td class="highlight-rate">4.14%</td>
-                            <td>75%</td>
-                            <td>£995</td>
-                            <td>5.1%</td>
-                            <td>Free valuation</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Halifax</strong></td>
-                            <td class="highlight-rate">4.29%</td>
-                            <td>80%</td>
-                            <td>£999</td>
-                            <td>5.2%</td>
-                            <td>Free valuation</td>
-                        </tr>
-                        <tr>
-                            <td><strong>TSB</strong></td>
-                            <td class="highlight-rate">4.49%</td>
-                            <td>85%</td>
-                            <td>£995</td>
-                            <td>5.4%</td>
-                            <td>Free valuation</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Lloyds</strong></td>
-                            <td class="highlight-rate">4.69%</td>
-                            <td>90%</td>
-                            <td>£999</td>
-                            <td>5.6%</td>
-                            <td>Free valuation</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- 5 Year Fixed Rates -->
-        <div class="calculator-card">
-            <div class="section-header">
-                <i class="fas fa-calendar-alt section-icon"></i>
-                <h2>5 Year Fixed Rate Mortgages</h2>
-            </div>
-
-            <div class="rates-table">
-                <table class="comparison-table" id="fiveYearTable">
-                    <thead>
-                        <tr>
-                            <th>Lender</th>
-                            <th>Rate</th>
-                            <th>LTV</th>
-                            <th>Product Fee</th>
-                            <th>APRC</th>
-                            <th>Features</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>HSBC</strong></td>
-                            <td class="highlight-rate">4.09%</td>
-                            <td>60%</td>
-                            <td>£999</td>
-                            <td>5.0%</td>
-                            <td>Free valuation, £500 cashback</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Santander</strong></td>
-                            <td class="highlight-rate">4.14%</td>
-                            <td>60%</td>
-                            <td>£999</td>
-                            <td>5.1%</td>
-                            <td>Free valuation, £250 cashback</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Barclays</strong></td>
-                            <td class="highlight-rate">4.19%</td>
-                            <td>60%</td>
-                            <td>£999</td>
-                            <td>5.1%</td>
-                            <td>Free valuation</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Nationwide</strong></td>
-                            <td class="highlight-rate">4.24%</td>
-                            <td>75%</td>
-                            <td>£999</td>
-                            <td>5.2%</td>
-                            <td>Free legal fees for remortgage</td>
-                        </tr>
-                        <tr>
-                            <td><strong>NatWest</strong></td>
-                            <td class="highlight-rate">4.34%</td>
-                            <td>75%</td>
-                            <td>£995</td>
-                            <td>5.3%</td>
-                            <td>Free valuation</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Halifax</strong></td>
-                            <td class="highlight-rate">4.49%</td>
-                            <td>80%</td>
-                            <td>£999</td>
-                            <td>5.4%</td>
-                            <td>Free valuation</td>
-                        </tr>
-                        <tr>
-                            <td><strong>TSB</strong></td>
-                            <td class="highlight-rate">4.69%</td>
-                            <td>85%</td>
-                            <td>£995</td>
-                            <td>5.6%</td>
-                            <td>Free valuation</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Lloyds</strong></td>
-                            <td class="highlight-rate">4.89%</td>
-                            <td>90%</td>
-                            <td>£999</td>
-                            <td>5.8%</td>
-                            <td>Free valuation</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Nationwide</strong></td>
-                            <td class="highlight-rate">5.19%</td>
-                            <td>95%</td>
-                            <td>£999</td>
-                            <td>6.1%</td>
-                            <td>First-time buyer, free valuation</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Tracker Mortgages -->
-        <div class="calculator-card">
-            <div class="section-header">
-                <i class="fas fa-chart-line section-icon"></i>
-                <h2>Tracker Mortgages</h2>
-            </div>
-
-            <div class="rates-table">
-                <table class="comparison-table" id="trackerTable">
-                    <thead>
-                        <tr>
-                            <th>Lender</th>
-                            <th>Rate</th>
-                            <th>LTV</th>
-                            <th>Tracker Details</th>
-                            <th>Product Fee</th>
-                            <th>Features</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>First Direct</strong></td>
-                            <td class="highlight-rate">5.74%</td>
-                            <td>60%</td>
-                            <td>BoE Base + 0.99%</td>
-                            <td>£0</td>
-                            <td>Lifetime tracker, no fee</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Yorkshire BS</strong></td>
-                            <td class="highlight-rate">5.84%</td>
-                            <td>75%</td>
-                            <td>BoE Base + 1.09%</td>
-                            <td>£0</td>
-                            <td>Lifetime tracker, no fee</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Coventry BS</strong></td>
-                            <td class="highlight-rate">5.94%</td>
-                            <td>80%</td>
-                            <td>BoE Base + 1.19%</td>
-                            <td>£999</td>
-                            <td>2 year tracker</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Skipton BS</strong></td>
-                            <td class="highlight-rate">6.04%</td>
-                            <td>85%</td>
-                            <td>BoE Base + 1.29%</td>
-                            <td>£995</td>
-                            <td>2 year tracker</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Information Section -->
-        <div class="calculator-card">
-            <div class="info-section">
-                <h2><i class="fas fa-info-circle"></i> Understanding Mortgage Rates</h2>
                 
+                <div class="input-group">
+                    <label for="depositAmount"><i class="fas fa-piggy-bank"></i> Deposit Amount</label>
+                    <div class="input-with-symbol">
+                        <span class="currency-symbol">£</span>
+                        <input type="number" id="depositAmount" value="80000" min="0" step="1000" required>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="mortgageAmount"><i class="fas fa-pound-sign"></i> Mortgage Amount</label>
+                    <div class="input-with-symbol">
+                        <span class="currency-symbol">£</span>
+                        <input type="number" id="mortgageAmount" value="200000" readonly style="background: #f5f5f5;">
+                    </div>
+                    <small style="color: var(--text-medium); display: block; margin-top: 0.25rem;">
+                        LTV: <strong id="ltvDisplay">71%</strong>
+                    </small>
+                </div>
+                
+                <div class="input-group">
+                    <label for="term"><i class="fas fa-calendar-alt"></i> Mortgage Term (years)</label>
+                    <input type="number" id="term" value="25" min="5" max="40" class="select-input" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="repaymentMethod"><i class="fas fa-exchange-alt"></i> Repayment Method</label>
+                    <select id="repaymentMethod" class="select-input">
+                        <option value="repayment" selected>Repayment</option>
+                        <option value="interest-only">Interest Only</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="calculate-btn">
+                    <i class="fas fa-search"></i> Find Deals
+                </button>
+            </form>
+
+            <div class="info-box" style="margin-top: 1.5rem; font-size: 0.85rem;">
+                <i class="fas fa-info-circle"></i>
+                <p><strong>Last updated:</strong> November 2025<br>
+                Bank of England base rate: 4.75%</p>
+            </div>
+        </aside>
+        
+        <!-- RIGHT MAIN AREA: Results -->
+        <main class="results-main">
+            <div class="results-header">
+                <h1><i class="fas fa-star"></i> Best Mortgage Deals</h1>
+                <p>Sorted by monthly payment (lowest first) • Showing deals for your criteria</p>
+            </div>
+
+            <div id="dealsContainer">
+                <!-- Deals will be dynamically inserted here -->
+            </div>
+
+            <!-- Information Section -->
+            <div class="info-section" style="margin-top: 2rem;">
+                <h2><i class="fas fa-lightbulb"></i> Understanding These Deals</h2>
                 <div class="tips-grid">
                     <div class="tip-card">
-                        <i class="fas fa-lock"></i>
-                        <h3>Fixed Rate</h3>
-                        <p>Your rate stays the same for the fixed period (typically 2, 3, 5, or 10 years). Protects you from rate rises but you won't benefit if rates fall.</p>
-                    </div>
-                    <div class="tip-card">
-                        <i class="fas fa-chart-line"></i>
-                        <h3>Tracker</h3>
-                        <p>Follows the Bank of England base rate plus a set margin. Goes up and down with the base rate, offering flexibility but less certainty.</p>
-                    </div>
-                    <div class="tip-card">
-                        <i class="fas fa-exchange-alt"></i>
-                        <h3>Variable Rate</h3>
-                        <p>Set by the lender and can change at any time. Usually the Standard Variable Rate (SVR) you move to after a fixed deal ends.</p>
-                    </div>
-                    <div class="tip-card">
                         <i class="fas fa-percentage"></i>
-                        <h3>LTV Ratio</h3>
-                        <p>Loan-to-Value is the size of your mortgage as a percentage of the property value. Lower LTV = better rates. 60% LTV means a 40% deposit.</p>
+                        <h3>Initial Rate</h3>
+                        <p>The interest rate for the fixed period (e.g., 2 or 5 years). After this, you'll move to the lender's Standard Variable Rate (SVR).</p>
                     </div>
                     <div class="tip-card">
                         <i class="fas fa-file-invoice-dollar"></i>
-                        <h3>Product Fees</h3>
-                        <p>Upfront fees charged by lenders. Can often be added to the mortgage. Lower rate deals typically have higher fees.</p>
+                        <h3>Product Fee</h3>
+                        <p>Upfront fee charged by the lender. Can often be added to the mortgage but you'll pay interest on it.</p>
                     </div>
                     <div class="tip-card">
                         <i class="fas fa-calculator"></i>
                         <h3>APRC</h3>
-                        <p>Annual Percentage Rate of Charge includes the interest rate plus fees, giving a true cost comparison over the deal period.</p>
+                        <p>Annual Percentage Rate of Charge - includes the rate plus fees, giving you the true cost over the deal period.</p>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="calculator-card">
-            <div class="info-section">
-                <h2><i class="fas fa-lightbulb"></i> Tips for Getting the Best Deal</h2>
-                
-                <div class="faq-section">
-                    <div class="faq-item">
-                        <h3>Should I choose a 2-year or 5-year fix?</h3>
-                        <p>2-year fixes typically have lower rates but you'll need to remortgage sooner. 5-year fixes offer longer-term certainty and protection from rate rises. Consider your plans and risk tolerance.</p>
-                    </div>
-
-                    <div class="faq-item">
-                        <h3>How much deposit do I need?</h3>
-                        <p>Minimum is typically 5% (95% LTV) but you'll get much better rates with a larger deposit. Each 5% band (90%, 85%, 80%, etc.) usually unlocks better deals.</p>
-                    </div>
-
-                    <div class="faq-item">
-                        <h3>Should I pay the product fee upfront or add it to the mortgage?</h3>
-                        <p>Paying upfront is cheaper overall as you won't pay interest on it. But adding it to the mortgage spreads the cost and preserves your cash.</p>
-                    </div>
-
-                    <div class="faq-item">
-                        <h3>When should I start looking for a new deal?</h3>
-                        <p>Start looking 3-6 months before your current deal ends. You can usually reserve a rate up to 6 months in advance.</p>
-                    </div>
-
-                    <div class="faq-item">
-                        <h3>Do I need a mortgage broker?</h3>
-                        <p>Brokers can access exclusive deals and save you time. Many offer free services as they're paid commission by lenders. They're especially helpful for complex situations.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <footer>
-            <div class="footer-content">
-                <p class="disclaimer">
-                    <i class="fas fa-info-circle"></i>
-                    <strong>Disclaimer:</strong> Rates shown are indicative and subject to change. Actual rates depend on your circumstances, credit score, and lender criteria. 
-                    Your home may be repossessed if you do not keep up repayments on your mortgage. Always seek professional mortgage advice.
-                </p>
-                <p style="margin-top: 1rem; font-size: 0.85rem; opacity: 0.7;">
-                    © 2024 QuidsIn. All rights reserved.
-                </p>
-            </div>
-        </footer>
+        </main>
     </div>
+
+    <footer style="max-width: 1400px; margin: 2rem auto; padding: 0 2rem;">
+        <div class="footer-content">
+            <p class="disclaimer">
+                <i class="fas fa-info-circle"></i>
+                <strong>Disclaimer:</strong> Rates shown are indicative and subject to change. Actual rates depend on your circumstances, credit score, and lender criteria. 
+                Your home may be repossessed if you do not keep up repayments on your mortgage. Always seek professional mortgage advice.
+            </p>
+            <p style="margin-top: 1rem; font-size: 0.85rem; opacity: 0.7;">
+                © 2024 Quids In. All rights reserved.
+            </p>
+        </div>
+    </footer>
 
     <script src="navigation.js"></script>
     <script src="find-mortgage-deals.js"></script>
 </body>
 </html>
-
