@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mortgage Overpayment Calculator - See how overpayments can reduce your mortgage term and save on interest.">
+    
+    <title>Mortgage Overpayment Calculator | QuidsIn</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- PropellerAds Interstitial -->
+    <script>(function(s){s.dataset.zone='10191564',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    
+    <!-- PropellerAds Multi-Tag -->
+    <script src="https://fpyf8.com/88/tag.min.js" data-zone="185556" async data-cfasync="false"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="logo-link">
+                <div class="quidsin-logo">
+                    <div class="logo-icon">£</div>
+                    <span class="logo-text">QuidsIn</span>
+                </div>
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        Mortgage & Property <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="mortgage-calculator.html">Mortgage Calculator</a></li>
+                        <li><a href="mortgage-overpayment.html">Mortgage Overpayment Calculator</a></li>
+                        <li><a href="buy-or-rent.html">Buy or Rent?</a></li>
+                        <li><a href="mortgage-comparison.html">Mortgage Comparison</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        Savings <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="best-savings-rates.html">Best Savings Rates</a></li>
+                        <li><a href="best-fixed-rate-bonds.html">Best Fixed Rate Bonds</a></li>
+                        <li><a href="isa-platforms.html">ISA Platforms</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        Tax <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="income-tax-calculator.html">Income Tax Calculator</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>Mortgage Overpayment Calculator</h1>
+            <p class="subtitle">See how overpayments can reduce your term and save on interest</p>
+        </header>
+
+        <div class="calculator-card">
+            <form id="overpaymentForm">
+                <div class="form-section">
+                    <div class="section-header">
+                        <h2>Current Mortgage Details</h2>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="loanAmount">Outstanding mortgage balance</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="loanAmount" name="loanAmount" placeholder="e.g., 200000" min="0" step="1000" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="remainingTerm">Remaining term (years)</label>
+                        <input type="number" id="remainingTerm" name="remainingTerm" class="select-input" placeholder="e.g., 20" min="1" max="40" value="20" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="interestRate">Interest rate (%)</label>
+                        <div class="input-with-symbol">
+                            <input type="number" id="interestRate" name="interestRate" placeholder="e.g., 4.5" min="0" max="20" step="0.1" value="4.5" required style="padding-left: 0.75rem;">
+                            <span class="percent-symbol">%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="section-header">
+                        <h2>Overpayment Details</h2>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="overpaymentAmount">Monthly overpayment</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="overpaymentAmount" name="overpaymentAmount" placeholder="e.g., 200" min="0" step="50" value="0">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="calculate-btn">
+                    <i class="fas fa-calculator"></i> Calculate savings
+                </button>
+            </form>
+
+            <div id="results" class="results-section" style="display: none;">
+                <div class="results-header">
+                    <h2>Your Results</h2>
+                </div>
+                
+                <div class="table-breakdown">
+                    <div class="table-responsive">
+                        <table class="breakdown-table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Without Overpayment</th>
+                                    <th>With Overpayment</th>
+                                    <th>Difference</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Monthly Payment</strong></td>
+                                    <td id="normalMonthly">£0</td>
+                                    <td id="overpaymentMonthly">£0</td>
+                                    <td id="monthlyDiff">£0</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Total Interest Paid</strong></td>
+                                    <td id="normalInterest">£0</td>
+                                    <td id="overpaymentInterest">£0</td>
+                                    <td id="interestSaved" style="color: var(--success-color); font-weight: bold;">£0</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Mortgage Term</strong></td>
+                                    <td id="normalTerm">0 years</td>
+                                    <td id="overpaymentTerm">0 years</td>
+                                    <td id="termSaved" style="color: var(--success-color); font-weight: bold;">0 years</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="breakdown">
+                    <h3>Summary</h3>
+                    <p style="font-size: 0.95rem; line-height: 1.6;">
+                        By overpaying <strong id="summaryOverpayment">£0</strong> per month, you could save 
+                        <strong id="summarySavings" style="color: var(--success-color);">£0</strong> in interest 
+                        and pay off your mortgage <strong id="summaryYears" style="color: var(--success-color);">0 years</strong> earlier.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <p class="disclaimer">
+                    <strong>Disclaimer:</strong> Check your mortgage terms for overpayment limits and penalties. 
+                    Most lenders allow overpayments of up to 10% per year without charge. This calculator is for estimation purposes only.
+                </p>
+                <p style="margin-top: 1rem; font-size: 0.85rem; opacity: 0.7;">
+                    © 2024 QuidsIn. All rights reserved.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="navigation.js"></script>
+    <script src="mortgage-overpayment.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free UK Mortgage Calculator. Calculate your monthly repayments and see how much you can borrow.">
+    
+    <title>Mortgage Calculator | QuidsIn</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- PropellerAds Interstitial -->
+    <script>(function(s){s.dataset.zone='10191564',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    
+    <!-- PropellerAds Multi-Tag -->
+    <script src="https://fpyf8.com/88/tag.min.js" data-zone="185556" async data-cfasync="false"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="logo-link">
+                <div class="quidsin-logo">
+                    <div class="logo-icon">£</div>
+                    <span class="logo-text">QuidsIn</span>
+                </div>
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        Mortgage & Property <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="mortgage-calculator.html">Mortgage Calculator</a></li>
+                        <li><a href="mortgage-overpayment.html">Mortgage Overpayment Calculator</a></li>
+                        <li><a href="buy-or-rent.html">Buy or Rent?</a></li>
+                        <li><a href="mortgage-comparison.html">Mortgage Comparison</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        Savings <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="best-savings-rates.html">Best Savings Rates</a></li>
+                        <li><a href="best-fixed-rate-bonds.html">Best Fixed Rate Bonds</a></li>
+                        <li><a href="isa-platforms.html">ISA Platforms</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        Tax <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="income-tax-calculator.html">Income Tax Calculator</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>Mortgage Calculator</h1>
+            <p class="subtitle">Calculate how much you can borrow and your monthly repayments</p>
+        </header>
+
+        <div class="calculator-card">
+            <form id="mortgageForm">
+                <div class="form-section">
+                    <div class="section-header">
+                        <h2>Your Details</h2>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="buyers">How many buyers?</label>
+                        <select id="buyers" name="buyers" class="select-input">
+                            <option value="1" selected>1</option>
+                            <option value="2">2</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="income1">First buyer's annual income</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="income1" name="income1" placeholder="Enter amount" min="0" step="1000" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group" id="income2Group" style="display: none;">
+                        <label for="income2">Second buyer's annual income</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="income2" name="income2" placeholder="Enter amount" min="0" step="1000">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="deposit">Deposit</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="deposit" name="deposit" placeholder="Enter amount" min="0" step="1000" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="term">Total mortgage term (years)</label>
+                        <input type="number" id="term" name="term" class="select-input" placeholder="e.g., 25" min="5" max="40" value="25" required>
+                        <small style="color: var(--text-medium); display: block; margin-top: 0.25rem;">The term should be between 5 and 40 years</small>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="interestRate">Interest rate (%)</label>
+                        <div class="input-with-symbol">
+                            <input type="number" id="interestRate" name="interestRate" placeholder="e.g., 4.5" min="0" max="20" step="0.1" value="4.5" required style="padding-left: 0.75rem;">
+                            <span class="percent-symbol">%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="calculate-btn">
+                    <i class="fas fa-calculator"></i> Calculate my mortgage
+                </button>
+            </form>
+
+            <div id="results" class="results-section" style="display: none;">
+                <div class="results-header">
+                    <h2>Your Result</h2>
+                </div>
+                
+                <div class="breakdown">
+                    <div class="breakdown-item total">
+                        <span>You could borrow up to:</span>
+                        <span id="maxLoan" style="font-size: 1.5rem;">£0</span>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-medium); margin-top: 0.5rem;">
+                        This is the largest mortgage you're likely to be offered, based on your total income of <strong id="totalIncome">£0</strong>
+                    </p>
+                </div>
+
+                <div class="breakdown">
+                    <div class="breakdown-item total">
+                        <span>Your monthly repayments could be:</span>
+                        <span id="monthlyPayment" style="font-size: 1.5rem;">£0</span>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-medium); margin-top: 0.5rem;">
+                        This assumes an interest rate of <strong id="displayRate">0%</strong> throughout your total mortgage term of <strong id="displayTerm">0 years</strong>
+                    </p>
+                </div>
+
+                <div class="breakdown">
+                    <div class="breakdown-item total">
+                        <span>Your loan-to-value (LTV) ratio is:</span>
+                        <span id="ltvRatio" style="font-size: 1.5rem;">0%</span>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-medium); margin-top: 0.5rem;">
+                        This is based on your maximum loan size of <strong id="loanForLTV">£0</strong> and your deposit <strong id="depositForLTV">£0</strong>
+                    </p>
+                    <p id="ltvAdvice" style="font-size: 0.85rem; color: var(--text-medium); margin-top: 0.5rem;"></p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <p class="disclaimer">
+                    <strong>Disclaimer:</strong> This calculator is for estimation purposes only. 
+                    Actual mortgage offers may vary based on your credit score, employment status, and other factors. 
+                    Always seek professional financial advice.
+                </p>
+                <p style="margin-top: 1rem; font-size: 0.85rem; opacity: 0.7;">
+                    © 2024 QuidsIn. All rights reserved.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="navigation.js"></script>
+    <script src="mortgage-calculator.js"></script>
+</body>
+</html>
+
