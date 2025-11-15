@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free UK Income Tax Calculator for 2024/25 & 2025/26. Calculate your take-home pay with accurate HMRC tax, National Insurance, pension, and student loan deductions.">
+    <meta name="keywords" content="UK tax calculator, income tax calculator, take home pay, salary calculator, HMRC, National Insurance, pension calculator, student loan repayment">
+    <meta name="author" content="Income Tax Calculator">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Income Tax Calculator | UK 2024/25 & 2025/26">
+    <meta property="og:description" content="Calculate your UK take-home pay with accurate HMRC tax, National Insurance, pension, and student loan deductions.">
+    
+    <title>Income Tax Calculator | UK 2024/25 & 2025/26</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google AdSense - Replace with your AdSense publisher ID -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Top Ad Banner -->
+        <div class="ad-container ad-top">
+            <!-- Google AdSense - Top Banner Ad (728x90 or responsive) -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                 data-ad-slot="XXXXXXXXXX"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <header>
+            <div class="logo">
+                <i class="fas fa-calculator"></i>
+            </div>
+            <h1>Income Tax Calculator</h1>
+            <p class="subtitle">Calculate your UK take-home pay with accurate HMRC tax, National Insurance, pension, and student loan deductions</p>
+            <div class="header-badge">
+                <i class="fas fa-calendar-alt"></i> Tax Year 2024/25 & 2025/26
+            </div>
+        </header>
+
+        <div class="calculator-card">
+            <form id="salaryForm">
+                <!-- Salary Input Section -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-pound-sign section-icon"></i>
+                        <h2>Your Salary</h2>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="salary">
+                            <i class="fas fa-money-bill-wave"></i> Gross Salary (Pre-Tax)
+                        </label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input 
+                                type="number" 
+                                id="salary" 
+                                name="salary" 
+                                placeholder="Enter amount"
+                                min="0"
+                                step="0.01"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>
+                            <i class="fas fa-calendar"></i> Payment Frequency
+                        </label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="frequency" value="annual" checked>
+                                <span>
+                                    <i class="fas fa-calendar-check"></i>
+                                    Annual
+                                </span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="frequency" value="monthly">
+                                <span>
+                                    <i class="fas fa-calendar-day"></i>
+                                    Monthly
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="taxYear">
+                            <i class="fas fa-calendar-alt"></i> Tax Year
+                        </label>
+                        <select id="taxYear" name="taxYear" class="select-input">
+                            <option value="2024/25">2024/25</option>
+                            <option value="2025/26" selected>2025/26</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="ageGroup">
+                            <i class="fas fa-user"></i> Age Group
+                        </label>
+                        <select id="ageGroup" name="ageGroup" class="select-input">
+                            <option value="under66" selected>Under 66 (Full NI)</option>
+                            <option value="66-74">66-74 (No NI)</option>
+                            <option value="over74">Over 74 (No NI)</option>
+                        </select>
+                        <div class="info-box">
+                            <i class="fas fa-info-circle"></i>
+                            <p>National Insurance is not paid once you reach State Pension age (currently 66)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pension Section -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-piggy-bank section-icon"></i>
+                        <h2>Pension Contribution (Salary Sacrifice)</h2>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="hasPension" name="hasPension">
+                            <span><i class="fas fa-hand-holding-usd"></i> I make pension contributions via salary sacrifice</span>
+                        </label>
+                        <div class="info-box">
+                            <i class="fas fa-info-circle"></i>
+                            <p>Salary sacrifice reduces your gross pay before tax and NI, providing significant savings. Annual allowance is £60,000 (2025/26).</p>
+                        </div>
+                    </div>
+
+                    <div id="pensionInputs" style="display: none;">
+                        <div class="input-group">
+                            <label>
+                                <i class="fas fa-calculator"></i> Contribution Type
+                            </label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="pensionType" value="percentage" checked>
+                                    <span>
+                                        <i class="fas fa-percent"></i>
+                                        Percentage
+                                    </span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="pensionType" value="amount">
+                                    <span>
+                                        <i class="fas fa-pound-sign"></i>
+                                        Fixed Amount
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="input-group" id="pensionPercentageGroup">
+                            <label for="pensionPercentage">
+                                <i class="fas fa-percent"></i> Monthly Contribution %
+                            </label>
+                            <div class="input-with-symbol">
+                                <input 
+                                    type="number" 
+                                    id="pensionPercentage" 
+                                    name="pensionPercentage" 
+                                    placeholder="e.g., 5"
+                                    min="0"
+                                    max="100"
+                                    step="0.1"
+                                    value="5"
+                                >
+                                <span class="percent-symbol">%</span>
+                            </div>
+                        </div>
+
+                        <div class="input-group" id="pensionAmountGroup" style="display: none;">
+                            <label for="pensionAmount">
+                                <i class="fas fa-pound-sign"></i> Monthly Contribution Amount
+                            </label>
+                            <div class="input-with-symbol">
+                                <span class="currency-symbol">£</span>
+                                <input 
+                                    type="number" 
+                                    id="pensionAmount" 
+                                    name="pensionAmount" 
+                                    placeholder="e.g., 200"
+                                    min="0"
+                                    step="0.01"
+                                    value="200"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Student Loan Section -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-graduation-cap section-icon"></i>
+                        <h2>Student Loan</h2>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="studentLoanPlan">
+                            <i class="fas fa-file-alt"></i> Student Loan Repayment Plan
+                        </label>
+                        <select id="studentLoanPlan" name="studentLoanPlan" class="select-input">
+                            <option value="none" selected>No Student Loan</option>
+                            <option value="plan1">Plan 1 (Before Sept 2012, England/Wales)</option>
+                            <option value="plan2">Plan 2 (Sept 2012+, England/Wales)</option>
+                            <option value="plan4">Plan 4 (Scotland)</option>
+                            <option value="plan5">Plan 5 (Aug 2023+, England/Wales)</option>
+                            <option value="postgrad">Postgraduate Loan</option>
+                        </select>
+                    </div>
+
+                    <div id="studentLoanInfo" style="display: none;">
+                        <div class="info-box" id="studentLoanDetails">
+                            <i class="fas fa-info-circle"></i>
+                            <p id="studentLoanText"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="calculate-btn">
+                    <i class="fas fa-calculator"></i> Calculate Net Pay
+                </button>
+            </form>
+
+            <!-- Sidebar Ad (after form, before results) -->
+            <div class="ad-container ad-sidebar">
+                <!-- Google AdSense - Sidebar/Rectangle Ad (300x250) -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                     data-ad-slot="XXXXXXXXXX"
+                     data-ad-format="rectangle"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results" class="results-section" style="display: none;">
+                <div class="results-header">
+                    <i class="fas fa-chart-line"></i>
+                    <h2>Your Take-Home Pay</h2>
+                </div>
+                
+                <div class="summary-card">
+                    <div class="net-pay-display">
+                        <div class="net-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <span class="net-label">Net Pay</span>
+                        <span class="net-amount" id="netPayAmount">£0</span>
+                        <span class="net-period" id="netPayPeriod">per year</span>
+                    </div>
+                </div>
+
+                <div class="breakdown">
+                    <h3><i class="fas fa-list-ul"></i> Detailed Breakdown</h3>
+                    
+                    <div class="breakdown-item">
+                        <span><i class="fas fa-money-check-alt"></i> Gross Salary</span>
+                        <span id="grossSalary">£0</span>
+                    </div>
+
+                    <div class="breakdown-item pension-item" id="pensionRow" style="display: none;">
+                        <span><i class="fas fa-piggy-bank"></i> Pension Contribution (Salary Sacrifice)</span>
+                        <span id="pensionAmount" class="negative">-£0</span>
+                    </div>
+
+                    <div class="breakdown-divider"></div>
+
+                    <div class="breakdown-item" id="adjustedGrossRow">
+                        <span><i class="fas fa-receipt"></i> Adjusted Gross Salary</span>
+                        <span id="adjustedGrossSalary">£0</span>
+                    </div>
+
+                    <div class="breakdown-divider"></div>
+
+                    <div class="breakdown-item tax-item">
+                        <span><i class="fas fa-file-invoice-dollar"></i> Income Tax</span>
+                        <span id="incomeTax" class="negative">-£0</span>
+                    </div>
+
+                    <div class="breakdown-item ni-item">
+                        <span><i class="fas fa-landmark"></i> National Insurance</span>
+                        <span id="nationalInsurance" class="negative">-£0</span>
+                    </div>
+
+                    <div class="breakdown-item student-item" id="studentLoanRow" style="display: none;">
+                        <span><i class="fas fa-graduation-cap"></i> Student Loan Repayment</span>
+                        <span id="studentLoanRepayment" class="negative">-£0</span>
+                    </div>
+
+                    <div class="breakdown-divider total-divider"></div>
+
+                    <div class="breakdown-item total">
+                        <span><i class="fas fa-wallet"></i> Net Pay</span>
+                        <span id="netPay">£0</span>
+                    </div>
+                </div>
+
+                <!-- Detailed Table Breakdown -->
+                <div class="table-breakdown">
+                    <h3><i class="fas fa-table"></i> Annual vs Monthly Breakdown</h3>
+                    <div class="table-responsive">
+                        <table class="breakdown-table">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Annual</th>
+                                    <th>Monthly</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="highlight-row">
+                                    <td><i class="fas fa-money-check-alt"></i> Gross Salary</td>
+                                    <td id="tableGrossAnnual">£0</td>
+                                    <td id="tableGrossMonthly">£0</td>
+                                </tr>
+                                <tr id="tablePensionRow" style="display: none;">
+                                    <td><i class="fas fa-piggy-bank"></i> Pension Contribution</td>
+                                    <td id="tablePensionAnnual" class="negative">-£0</td>
+                                    <td id="tablePensionMonthly" class="negative">-£0</td>
+                                </tr>
+                                <tr class="subtotal-row" id="tableAdjustedRow">
+                                    <td><strong>Adjusted Gross</strong></td>
+                                    <td id="tableAdjustedAnnual"><strong>£0</strong></td>
+                                    <td id="tableAdjustedMonthly"><strong>£0</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fas fa-file-invoice-dollar"></i> Income Tax</td>
+                                    <td id="tableTaxAnnual" class="negative">-£0</td>
+                                    <td id="tableTaxMonthly" class="negative">-£0</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fas fa-landmark"></i> National Insurance</td>
+                                    <td id="tableNIAnnual" class="negative">-£0</td>
+                                    <td id="tableNIMonthly" class="negative">-£0</td>
+                                </tr>
+                                <tr id="tableStudentLoanRow" style="display: none;">
+                                    <td><i class="fas fa-graduation-cap"></i> Student Loan</td>
+                                    <td id="tableStudentLoanAnnual" class="negative">-£0</td>
+                                    <td id="tableStudentLoanMonthly" class="negative">-£0</td>
+                                </tr>
+                                <tr class="total-row">
+                                    <td><strong><i class="fas fa-wallet"></i> Net Pay</strong></td>
+                                    <td id="tableNetAnnual"><strong>£0</strong></td>
+                                    <td id="tableNetMonthly"><strong>£0</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="monthly-breakdown" id="monthlyBreakdown" style="display: none;">
+                    <h3><i class="fas fa-calendar-alt"></i> Quick Monthly View</h3>
+                    <div class="breakdown-item">
+                        <span><i class="fas fa-coins"></i> Gross Monthly</span>
+                        <span id="monthlyGross">£0</span>
+                    </div>
+                    <div class="breakdown-item total">
+                        <span><i class="fas fa-wallet"></i> Net Monthly</span>
+                        <span id="monthlyNet">£0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Ad Banner -->
+        <div class="ad-container ad-bottom">
+            <!-- Google AdSense - Bottom Banner Ad (728x90 or responsive) -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                 data-ad-slot="XXXXXXXXXX"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <p class="disclaimer">
+                    <i class="fas fa-info-circle"></i> 
+                    <strong>Disclaimer:</strong> Tax year 2024/25 & 2025/26. This calculator is for estimation purposes only. Actual deductions may vary based on your tax code and other circumstances.
+                </p>
+                <div class="footer-badges">
+                    <span class="badge"><i class="fas fa-shield-alt"></i> Privacy-First</span>
+                    <span class="badge"><i class="fas fa-lock"></i> Secure</span>
+                    <span class="badge"><i class="fas fa-map-marker-alt"></i> Made for UK</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
