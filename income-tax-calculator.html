@@ -35,7 +35,7 @@
                     <img src="logo.svg" alt="QuidWise Logo" class="logo-image">
                     <div class="logo-text-container">
                         <span class="logo-text">QuidWise</span>
-                        <span class="logo-tagline">Your comprehensive UK personal finance and comparison site</span>
+                        <span class="logo-tagline">Make your pay go further</span>
                     </div>
                 </div>
             </a>
@@ -111,7 +111,7 @@
                     
                     <div class="input-group">
                         <label for="salary">
-                            <i class="fas fa-money-bill-wave"></i> Gross Salary (Pre-Tax)
+                            <i class="fas fa-money-bill-wave"></i> Annual Gross Salary (Pre-Tax)
                         </label>
                         <div class="input-with-symbol">
                             <span class="currency-symbol">£</span>
@@ -119,7 +119,7 @@
                                 type="number" 
                                 id="salary" 
                                 name="salary" 
-                                placeholder="Enter amount"
+                                placeholder="Enter annual amount"
                                 min="0"
                                 step="0.01"
                                 required
@@ -128,26 +128,16 @@
                     </div>
 
                     <div class="input-group">
-                        <label>
-                            <i class="fas fa-calendar"></i> Payment Frequency
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="isScotland" name="isScotland">
+                            <span><i class="fas fa-map-marker-alt"></i> I live in Scotland</span>
                         </label>
-                        <div class="radio-group">
-                            <label class="radio-label">
-                                <input type="radio" name="frequency" value="annual" checked>
-                                <span>
-                                    <i class="fas fa-calendar-check"></i>
-                                    Annual
-                                </span>
-                            </label>
-                            <label class="radio-label">
-                                <input type="radio" name="frequency" value="monthly">
-                                <span>
-                                    <i class="fas fa-calendar-day"></i>
-                                    Monthly
-                                </span>
-                            </label>
-                        </div>
+                        <p class="help-text">Scottish residents pay different income tax rates</p>
                     </div>
+
+                    <button type="submit" class="calculate-btn">
+                        <i class="fas fa-calculator"></i> Calculate Take-Home Pay
+                    </button>
 
                     <div class="input-group">
                         <label for="taxYear">
@@ -247,6 +237,33 @@
                     </div>
                 </div>
 
+                <!-- Bonus Section -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-gift section-icon"></i>
+                        <h2>Annual Bonus</h2>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="bonus">
+                            <i class="fas fa-star"></i> Annual Bonus Amount
+                        </label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input 
+                                type="number" 
+                                id="bonus" 
+                                name="bonus" 
+                                placeholder="0"
+                                min="0"
+                                step="0.01"
+                                value="0"
+                            >
+                        </div>
+                        <p class="help-text">Bonus is taxed the same way as regular income</p>
+                    </div>
+                </div>
+
                 <!-- Student Loan Section -->
                 <div class="form-section">
                     <div class="section-header">
@@ -275,10 +292,6 @@
                         </div>
                     </div>
                 </div>
-
-                <button type="submit" class="calculate-btn">
-                    <i class="fas fa-calculator"></i> Calculate Net Pay
-                </button>
             </form>
 
             <!-- Results Section -->
