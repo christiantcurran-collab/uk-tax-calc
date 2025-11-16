@@ -151,17 +151,17 @@ function calculateIncomeTax(adjustedGrossSalary, taxYear, isScotland = false) {
     const taxableIncome = adjustedGrossSalary - personalAllowance;
     
     // Apply tax bands from config
-    // Bands are defined by their gross income thresholds
+    // Bands are defined by their gross income thresholds (assuming standard PA of £12,570)
+    // We need to convert these to taxable income bands
+    const standardPA = 12570;
+    
     for (let i = 0; i < config.taxBands.length; i++) {
         const band = config.taxBands[i];
         
-        // Calculate the taxable income range for this band
-        const bandStartGross = band.threshold;
-        const bandEndGross = band.limit;
-        
-        // Convert to taxable income (after personal allowance)
-        const bandStartTaxable = Math.max(0, bandStartGross - personalAllowance);
-        const bandEndTaxable = bandEndGross - personalAllowance;
+        // Convert gross income thresholds to taxable income thresholds
+        // (using standard PA, not the individual's PA)
+        const bandStartTaxable = Math.max(0, band.threshold - standardPA);
+        const bandEndTaxable = band.limit === Infinity ? Infinity : band.limit - standardPA;
         
         // Check if any of the taxable income falls in this band
         if (taxableIncome > bandStartTaxable) {
