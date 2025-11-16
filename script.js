@@ -34,6 +34,46 @@ const TAX_CONFIG = {
     }
 };
 
+// Scottish Tax Configuration for 2024/25 and 2025/26
+const SCOTTISH_TAX_CONFIG = {
+    '2024/25': {
+        personalAllowance: 12570,
+        personalAllowanceLimit: 100000,
+        taxBands: [
+            { threshold: 12570, rate: 0.19, limit: 14876, name: 'Starter Rate' },
+            { threshold: 14876, rate: 0.20, limit: 26561, name: 'Basic Rate' },
+            { threshold: 26561, rate: 0.21, limit: 43662, name: 'Intermediate Rate' },
+            { threshold: 43662, rate: 0.42, limit: 125140, name: 'Higher Rate' },
+            { threshold: 125140, rate: 0.47, limit: Infinity, name: 'Top Rate' }
+        ],
+        ni: {
+            primaryThreshold: 12570,
+            upperEarningsLimit: 50270,
+            class1Rate: 0.08,
+            class1UpperRate: 0.02
+        },
+        pensionAnnualAllowance: 60000
+    },
+    '2025/26': {
+        personalAllowance: 12570,
+        personalAllowanceLimit: 100000,
+        taxBands: [
+            { threshold: 12570, rate: 0.19, limit: 14876, name: 'Starter Rate' },
+            { threshold: 14876, rate: 0.20, limit: 26561, name: 'Basic Rate' },
+            { threshold: 26561, rate: 0.21, limit: 43662, name: 'Intermediate Rate' },
+            { threshold: 43662, rate: 0.42, limit: 125140, name: 'Higher Rate' },
+            { threshold: 125140, rate: 0.47, limit: Infinity, name: 'Top Rate' }
+        ],
+        ni: {
+            primaryThreshold: 12570,
+            upperEarningsLimit: 50270,
+            class1Rate: 0.08,
+            class1UpperRate: 0.02
+        },
+        pensionAnnualAllowance: 60000
+    }
+};
+
 // Student Loan Configuration
 const STUDENT_LOAN_CONFIG = {
     plan1: {
@@ -79,8 +119,8 @@ function formatCurrency(amount) {
 }
 
 // Calculate personal allowance (tapers for high earners)
-function calculatePersonalAllowance(adjustedGrossSalary, taxYear) {
-    const config = TAX_CONFIG[taxYear];
+function calculatePersonalAllowance(adjustedGrossSalary, taxYear, isScotland = false) {
+    const config = isScotland ? SCOTTISH_TAX_CONFIG[taxYear] : TAX_CONFIG[taxYear];
     
     if (adjustedGrossSalary <= config.personalAllowanceLimit) {
         return config.personalAllowance;
@@ -94,9 +134,9 @@ function calculatePersonalAllowance(adjustedGrossSalary, taxYear) {
 }
 
 // Calculate income tax
-function calculateIncomeTax(adjustedGrossSalary, taxYear) {
-    const config = TAX_CONFIG[taxYear];
-    const personalAllowance = calculatePersonalAllowance(adjustedGrossSalary, taxYear);
+function calculateIncomeTax(adjustedGrossSalary, taxYear, isScotland = false) {
+    const config = isScotland ? SCOTTISH_TAX_CONFIG[taxYear] : TAX_CONFIG[taxYear];
+    const personalAllowance = calculatePersonalAllowance(adjustedGrossSalary, taxYear, isScotland);
     
     let tax = 0;
     
@@ -219,7 +259,7 @@ function calculateNetPay(formData) {
     const adjustedGrossSalary = annualGrossSalary - annualPensionContribution;
     
     // Calculate deductions
-    const incomeTax = calculateIncomeTax(adjustedGrossSalary, taxYear);
+    const incomeTax = calculateIncomeTax(adjustedGrossSalary, taxYear, isScotland);
     const nationalInsurance = calculateNationalInsurance(adjustedGrossSalary, taxYear, ageGroup);
     const studentLoanRepayment = calculateStudentLoanRepayment(adjustedGrossSalary, studentLoanPlan);
     
@@ -385,7 +425,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Get form values
         const salary = parseFloat(document.getElementById('salary').value);
-        const frequency = document.querySelector('input[name="frequency"]:checked').value;
+        const bonus = parseFloat(document.getElementById('bonus').value) || 0;
+        const isScotland = document.getElementById('isScotland').checked;
         const taxYear = document.getElementById('taxYear').value;
         const ageGroup = document.getElementById('ageGroup').value;
         const hasPension = hasPensionCheckbox.checked;
