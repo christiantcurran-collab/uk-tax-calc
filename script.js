@@ -151,19 +151,29 @@ function calculateIncomeTax(adjustedGrossSalary, taxYear, isScotland = false) {
     const taxableIncome = adjustedGrossSalary - personalAllowance;
     
     // Apply tax bands from config
+    // Bands are defined by their gross income thresholds
     for (let i = 0; i < config.taxBands.length; i++) {
         const band = config.taxBands[i];
-        const bandStart = i === 0 ? 0 : config.taxBands[i - 1].limit - personalAllowance;
-        const bandEnd = band.limit - personalAllowance;
         
-        if (taxableIncome > bandStart) {
-            const taxableInBand = Math.min(taxableIncome, bandEnd) - bandStart;
+        // Calculate the taxable income range for this band
+        const bandStartGross = band.threshold;
+        const bandEndGross = band.limit;
+        
+        // Convert to taxable income (after personal allowance)
+        const bandStartTaxable = Math.max(0, bandStartGross - personalAllowance);
+        const bandEndTaxable = bandEndGross - personalAllowance;
+        
+        // Check if any of the taxable income falls in this band
+        if (taxableIncome > bandStartTaxable) {
+            const taxableInBand = Math.min(taxableIncome, bandEndTaxable) - bandStartTaxable;
             if (taxableInBand > 0) {
                 tax += taxableInBand * band.rate;
+                console.log(`Band ${band.name}: £${taxableInBand.toFixed(2)} @ ${(band.rate * 100)}% = £${(taxableInBand * band.rate).toFixed(2)}`);
             }
         }
         
-        if (taxableIncome <= bandEnd) {
+        // Stop if we've accounted for all taxable income
+        if (taxableIncome <= bandEndTaxable) {
             break;
         }
     }
