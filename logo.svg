@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Owl body -->
+  <path d="M100 180 C60 180 30 150 30 110 L30 80 C30 50 50 30 70 20 C80 15 90 10 100 10 C110 10 120 15 130 20 C150 30 170 50 170 80 L170 110 C170 150 140 180 100 180 Z" fill="#1a6b5c"/>
+  
+  <!-- Ear tufts -->
+  <path d="M45 40 C40 30 35 20 40 10 C45 15 50 25 55 35 Z" fill="#1a6b5c"/>
+  <path d="M155 40 C160 30 165 20 160 10 C155 15 150 25 145 35 Z" fill="#1a6b5c"/>
+  
+  <!-- Left eye circle -->
+  <circle cx="70" cy="80" r="30" fill="#f5f5f5"/>
+  
+  <!-- Right eye circle -->
+  <circle cx="130" cy="80" r="30" fill="#f5f5f5"/>
+  
+  <!-- Left pound sign -->
+  <text x="70" y="95" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="#1a6b5c" text-anchor="middle">£</text>
+  
+  <!-- Right pound sign -->
+  <text x="130" y="95" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="#1a6b5c" text-anchor="middle">£</text>
+  
+  <!-- Beak/nose diamond -->
+  <path d="M100 95 L110 110 L100 125 L90 110 Z" fill="#f5f5f5"/>
+  
+  <!-- Wing detail -->
+  <path d="M60 120 L80 160 L70 165 L50 125 Z" fill="#2a8b7c" opacity="0.5"/>
+</svg>
+
