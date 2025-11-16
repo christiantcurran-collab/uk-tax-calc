@@ -43,8 +43,9 @@ const SCOTTISH_TAX_CONFIG = {
             { threshold: 12570, rate: 0.19, limit: 14876, name: 'Starter Rate' },
             { threshold: 14876, rate: 0.20, limit: 26561, name: 'Basic Rate' },
             { threshold: 26561, rate: 0.21, limit: 43662, name: 'Intermediate Rate' },
-            { threshold: 43662, rate: 0.42, limit: 125140, name: 'Higher Rate' },
-            { threshold: 125140, rate: 0.47, limit: Infinity, name: 'Top Rate' }
+            { threshold: 43662, rate: 0.42, limit: 75000, name: 'Higher Rate' },
+            { threshold: 75000, rate: 0.45, limit: 125140, name: 'Advanced Rate' },
+            { threshold: 125140, rate: 0.48, limit: Infinity, name: 'Top Rate' }
         ],
         ni: {
             primaryThreshold: 12570,
@@ -58,11 +59,12 @@ const SCOTTISH_TAX_CONFIG = {
         personalAllowance: 12570,
         personalAllowanceLimit: 100000,
         taxBands: [
-            { threshold: 12570, rate: 0.19, limit: 14876, name: 'Starter Rate' },
-            { threshold: 14876, rate: 0.20, limit: 26561, name: 'Basic Rate' },
-            { threshold: 26561, rate: 0.21, limit: 43662, name: 'Intermediate Rate' },
-            { threshold: 43662, rate: 0.42, limit: 125140, name: 'Higher Rate' },
-            { threshold: 125140, rate: 0.47, limit: Infinity, name: 'Top Rate' }
+            { threshold: 12570, rate: 0.19, limit: 15397, name: 'Starter Rate' },
+            { threshold: 15397, rate: 0.20, limit: 27491, name: 'Basic Rate' },
+            { threshold: 27491, rate: 0.21, limit: 43662, name: 'Intermediate Rate' },
+            { threshold: 43662, rate: 0.42, limit: 75000, name: 'Higher Rate' },
+            { threshold: 75000, rate: 0.45, limit: 125140, name: 'Advanced Rate' },
+            { threshold: 125140, rate: 0.48, limit: Infinity, name: 'Top Rate' }
         ],
         ni: {
             primaryThreshold: 12570,
