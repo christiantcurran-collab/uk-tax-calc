@@ -226,7 +226,8 @@ function calculateStudentLoanRepayment(adjustedGrossSalary, studentLoanPlan) {
 function calculateNetPay(formData) {
     const {
         salary,
-        isAnnual,
+        bonus,
+        isScotland,
         taxYear,
         ageGroup,
         hasPension,
@@ -236,8 +237,8 @@ function calculateNetPay(formData) {
         studentLoanPlan
     } = formData;
     
-    // Convert to annual salary
-    const annualGrossSalary = isAnnual ? salary : salary * 12;
+    // Salary is always annual now, add bonus
+    const annualGrossSalary = salary + bonus;
     
     // Calculate annual pension contribution
     let annualPensionContribution = 0;
@@ -455,7 +456,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Prepare form data
         const formData = {
             salary,
-            isAnnual: frequency === 'annual',
+            bonus,
+            isScotland,
             taxYear,
             ageGroup,
             hasPension,
@@ -468,7 +470,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Calculate net pay
         const results = calculateNetPay(formData);
         
-        // Display results
-        displayResults(results, formData.isAnnual, hasPension, studentLoanPlan !== 'none');
+        // Display results (always annual now)
+        displayResults(results, true, hasPension, studentLoanPlan !== 'none');
     });
 });
