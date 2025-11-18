@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8KXMNYDCS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-W8KXMNYDCS');
+    </script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9869727060387652"
+     crossorigin="anonymous"></script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Plan your monthly budget with our comprehensive budgeting tool. Track income, expenses, and see where your money goes.">
+    
+    <title>Budget Planner | QuidWise</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="logo-link">
+                <div class="quidwise-logo">
+                    <img src="logo.svg" alt="QuidWise Logo" class="logo-image">
+                    <div class="logo-text-container">
+                        <span class="logo-text">QuidWise</span>
+                        <span class="logo-tagline">Make your pay go further</span>
+                    </div>
+                </div>
+            </a>
+            
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-menu">
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">Tax <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="income-tax-calculator.html">Income Tax Calculator</a></li>
+                        <li><a href="budget-planner.html">Budget Planner</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">Mortgage & Property <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="mortgage-calculator.html">Mortgage Calculator</a></li>
+                        <li><a href="stamp-duty-calculator.html">Stamp Duty Calculator</a></li>
+                        <li><a href="find-mortgage-deals.html">Mortgage Rate Comparison</a></li>
+                        <li><a href="mortgage-overpayment.html">Mortgage Overpayment Calculator</a></li>
+                        <li><a href="buy-or-rent.html">Buy vs Rent Estimate</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">Savings <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="isa-platforms.html">ISA Platforms</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="broadband-comparison.html" class="nav-link">Broadband</a>
+                </li>
+                <li class="nav-item">
+                    <a href="blogs.html" class="nav-link">Blogs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" id="emailSignupBtn">Weekly Email</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-calculator"></i> Monthly Budget Planner</h1>
+            <p class="subtitle">Track your income and expenses to take control of your finances</p>
+        </header>
+
+        <div class="calculator-card">
+            <form id="budgetForm">
+                <!-- INCOME SECTION -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-pound-sign section-icon"></i>
+                        <h2>Monthly Income</h2>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="incomeEmployment"><i class="fas fa-briefcase"></i> Income from Employment</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="incomeEmployment" class="income-input" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="incomePension"><i class="fas fa-user-clock"></i> Income from Pension</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="incomePension" class="income-input" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="incomeBenefits"><i class="fas fa-hand-holding-usd"></i> Income from Benefits</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="incomeBenefits" class="income-input" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="incomeOther"><i class="fas fa-coins"></i> Other Income</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="incomeOther" class="income-input" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HOME SECTION -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-home section-icon"></i>
+                        <h2>Home</h2>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="homeMortgageRent"><i class="fas fa-house-user"></i> Mortgage/Rent</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="homeMortgageRent" class="expense-input" data-category="Home" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="homeGroundRent"><i class="fas fa-file-invoice-dollar"></i> Ground Rent/Service Charge</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="homeGroundRent" class="expense-input" data-category="Home" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="homeCouncilTax"><i class="fas fa-landmark"></i> Council Tax</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="homeCouncilTax" class="expense-input" data-category="Home" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="homeGas"><i class="fas fa-fire"></i> Gas</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="homeGas" class="expense-input" data-category="Home" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="homeElectricity"><i class="fas fa-bolt"></i> Electricity</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="homeElectricity" class="expense-input" data-category="Home" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="homeInternet"><i class="fas fa-wifi"></i> Internet</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="homeInternet" class="expense-input" data-category="Home" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="homeTVLicense"><i class="fas fa-tv"></i> TV License</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="homeTVLicense" class="expense-input" data-category="Home" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="homeTVSubs"><i class="fas fa-film"></i> TV Subscriptions</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="homeTVSubs" class="expense-input" data-category="Home" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="homeMobilePhone"><i class="fas fa-mobile-alt"></i> Mobile Phone</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="homeMobilePhone" class="expense-input" data-category="Home" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- INSURANCE SECTION -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-shield-alt section-icon"></i>
+                        <h2>Insurance</h2>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="insuranceLife"><i class="fas fa-heartbeat"></i> Life Insurance</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="insuranceLife" class="expense-input" data-category="Insurance" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="insuranceIncomeProtection"><i class="fas fa-user-shield"></i> Income Protection Insurance</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="insuranceIncomeProtection" class="expense-input" data-category="Insurance" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="insuranceCriticalIllness"><i class="fas fa-hospital"></i> Critical Illness Insurance</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="insuranceCriticalIllness" class="expense-input" data-category="Insurance" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="insurancePet"><i class="fas fa-paw"></i> Pet Insurance</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="insurancePet" class="expense-input" data-category="Insurance" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="insuranceDental"><i class="fas fa-tooth"></i> Dental Insurance</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="insuranceDental" class="expense-input" data-category="Insurance" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="insuranceOther"><i class="fas fa-ellipsis-h"></i> Other Insurance</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="insuranceOther" class="expense-input" data-category="Insurance" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TRANSPORT SECTION -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-car section-icon"></i>
+                        <h2>Transport</h2>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="transportCarInsurance"><i class="fas fa-car-crash"></i> Car Insurance</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="transportCarInsurance" class="expense-input" data-category="Transport" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="transportCarTax"><i class="fas fa-file-invoice"></i> Car Tax</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="transportCarTax" class="expense-input" data-category="Transport" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="transportFuel"><i class="fas fa-gas-pump"></i> Petrol/Diesel</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="transportFuel" class="expense-input" data-category="Transport" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="transportServicing"><i class="fas fa-wrench"></i> Car Servicing</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="transportServicing" class="expense-input" data-category="Transport" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="transportBreakdown"><i class="fas fa-phone-volume"></i> Breakdown/Recovery</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="transportBreakdown" class="expense-input" data-category="Transport" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="transportPublic"><i class="fas fa-bus"></i> Public Transport</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="transportPublic" class="expense-input" data-category="Transport" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="transportOther"><i class="fas fa-ellipsis-h"></i> Other Transport</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="transportOther" class="expense-input" data-category="Transport" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LOAN REPAYMENTS SECTION -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-credit-card section-icon"></i>
+                        <h2>Loan Repayments</h2>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="loanPersonal"><i class="fas fa-money-bill-wave"></i> Personal Loan Repayments</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="loanPersonal" class="expense-input" data-category="Loan Repayments" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="loanCar"><i class="fas fa-car"></i> Car Loan Repayments</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="loanCar" class="expense-input" data-category="Loan Repayments" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="loanCreditCard"><i class="fas fa-credit-card"></i> Credit Card Repayments</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="loanCreditCard" class="expense-input" data-category="Loan Repayments" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="loanOther"><i class="fas fa-ellipsis-h"></i> Other Loan Repayments</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="loanOther" class="expense-input" data-category="Loan Repayments" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FOOD & DRINK SECTION -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-utensils section-icon"></i>
+                        <h2>Food & Drink</h2>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="foodGroceries"><i class="fas fa-shopping-cart"></i> Groceries</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="foodGroceries" class="expense-input" data-category="Food & Drink" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="foodEatingOut"><i class="fas fa-utensils"></i> Eating Out</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="foodEatingOut" class="expense-input" data-category="Food & Drink" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="foodLunchWork"><i class="fas fa-coffee"></i> Lunch at Work</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="foodLunchWork" class="expense-input" data-category="Food & Drink" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="foodTakeaways"><i class="fas fa-pizza-slice"></i> Takeaways</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="foodTakeaways" class="expense-input" data-category="Food & Drink" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAMILY SECTION -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-users section-icon"></i>
+                        <h2>Family</h2>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="familyChildcare"><i class="fas fa-baby"></i> Childcare</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="familyChildcare" class="expense-input" data-category="Family" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="familySchoolFees"><i class="fas fa-school"></i> School Fees</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="familySchoolFees" class="expense-input" data-category="Family" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="familyActivities"><i class="fas fa-running"></i> Activities & Clubs</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="familyActivities" class="expense-input" data-category="Family" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="familyMaintenance"><i class="fas fa-hand-holding-usd"></i> Maintenance/Child Support</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="familyMaintenance" class="expense-input" data-category="Family" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="familyPetFood"><i class="fas fa-bone"></i> Pet Food</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="familyPetFood" class="expense-input" data-category="Family" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="familyVetBills"><i class="fas fa-stethoscope"></i> Vet Bills</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="familyVetBills" class="expense-input" data-category="Family" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="familySchoolTrips"><i class="fas fa-bus"></i> School Trips</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="familySchoolTrips" class="expense-input" data-category="Family" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ENTERTAINMENT SECTION -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-gamepad section-icon"></i>
+                        <h2>Entertainment</h2>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="entertainmentCinema"><i class="fas fa-film"></i> Cinema</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="entertainmentCinema" class="expense-input" data-category="Entertainment" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="entertainmentDaysOut"><i class="fas fa-map-marked-alt"></i> Days Out</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="entertainmentDaysOut" class="expense-input" data-category="Entertainment" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="entertainmentHobbies"><i class="fas fa-palette"></i> Hobbies</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="entertainmentHobbies" class="expense-input" data-category="Entertainment" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="entertainmentAppSubs"><i class="fas fa-mobile-alt"></i> App Subscriptions</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="entertainmentAppSubs" class="expense-input" data-category="Entertainment" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="entertainmentSeasonTickets"><i class="fas fa-ticket-alt"></i> Season Tickets</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="entertainmentSeasonTickets" class="expense-input" data-category="Entertainment" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="entertainmentGambling"><i class="fas fa-dice"></i> Lottery/Gambling</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="entertainmentGambling" class="expense-input" data-category="Entertainment" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HEALTH SECTION -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-heartbeat section-icon"></i>
+                        <h2>Health</h2>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="healthFitness"><i class="fas fa-dumbbell"></i> Fitness</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="healthFitness" class="expense-input" data-category="Health" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="healthHaircuts"><i class="fas fa-cut"></i> Haircuts</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="healthHaircuts" class="expense-input" data-category="Health" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="healthDentistry"><i class="fas fa-tooth"></i> Dentistry</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="healthDentistry" class="expense-input" data-category="Health" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="healthOpticians"><i class="fas fa-glasses"></i> Opticians</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="healthOpticians" class="expense-input" data-category="Health" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CLOTHES SECTION -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-tshirt section-icon"></i>
+                        <h2>Clothes</h2>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="clothesChildren"><i class="fas fa-child"></i> Children's Clothing</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="clothesChildren" class="expense-input" data-category="Clothes" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="clothesWork"><i class="fas fa-briefcase"></i> Work Clothing</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="clothesWork" class="expense-input" data-category="Clothes" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EDUCATION SECTION -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-graduation-cap section-icon"></i>
+                        <h2>Education</h2>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="educationCourses"><i class="fas fa-book"></i> Courses</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="educationCourses" class="expense-input" data-category="Education" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="educationSchoolFees"><i class="fas fa-school"></i> School Fees</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="educationSchoolFees" class="expense-input" data-category="Education" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="educationTuition"><i class="fas fa-chalkboard-teacher"></i> Tuition Fees</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="educationTuition" class="expense-input" data-category="Education" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OTHER SECTION -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-ellipsis-h section-icon"></i>
+                        <h2>Other</h2>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="otherHolidays"><i class="fas fa-plane"></i> Holidays</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="otherHolidays" class="expense-input" data-category="Other" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="otherChristmas"><i class="fas fa-gifts"></i> Christmas</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="otherChristmas" class="expense-input" data-category="Other" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="otherHomeRefurb"><i class="fas fa-hammer"></i> Home Refurbishments</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="otherHomeRefurb" class="expense-input" data-category="Other" placeholder="0" min="0" step="0.01" value="0">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="calculate-btn">
+                    <i class="fas fa-calculator"></i> Calculate Budget
+                </button>
+            </form>
+
+            <!-- RESULTS SECTION -->
+            <div id="results" class="results-section" style="display: none;">
+                <div class="results-header">
+                    <i class="fas fa-chart-pie"></i>
+                    <h2>Your Budget Summary</h2>
+                </div>
+
+                <!-- Summary Cards -->
+                <div class="budget-summary-cards">
+                    <div class="summary-card income-card">
+                        <div class="summary-icon"><i class="fas fa-pound-sign"></i></div>
+                        <div class="summary-content">
+                            <h3>Total Income</h3>
+                            <p class="summary-amount" id="totalIncome">£0.00</p>
+                        </div>
+                    </div>
+
+                    <div class="summary-card expense-card">
+                        <div class="summary-icon"><i class="fas fa-shopping-cart"></i></div>
+                        <div class="summary-content">
+                            <h3>Total Expenses</h3>
+                            <p class="summary-amount" id="totalExpenses">£0.00</p>
+                        </div>
+                    </div>
+
+                    <div class="summary-card balance-card">
+                        <div class="summary-icon"><i class="fas fa-balance-scale"></i></div>
+                        <div class="summary-content">
+                            <h3>Remaining</h3>
+                            <p class="summary-amount" id="netBalance">£0.00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category Breakdown -->
+                <div class="breakdown">
+                    <h3><i class="fas fa-list-ul"></i> Spending Breakdown by Category</h3>
+                    <div id="categoryBreakdown"></div>
+                </div>
+
+                <!-- Charts -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                    <div style="background: white; padding: 2rem; border-radius: 8px;">
+                        <canvas id="expensesPieChart"></canvas>
+                    </div>
+                    <div style="background: white; padding: 2rem; border-radius: 8px;">
+                        <canvas id="incomeVsExpensesChart"></canvas>
+                    </div>
+                </div>
+
+                <div style="background: white; padding: 2rem; border-radius: 8px; margin-top: 2rem;">
+                    <canvas id="categoryBarChart"></canvas>
+                </div>
+
+                <!-- Download Button -->
+                <button id="downloadExcel" class="calculate-btn" style="margin-top: 2rem;">
+                    <i class="fas fa-download"></i> Download as Excel
+                </button>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <p class="disclaimer">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Disclaimer:</strong> This budget planner is for personal planning purposes only. 
+                    All data is stored locally in your browser and is not sent to any server.
+                </p>
+                <p style="margin-top: 1rem; font-size: 0.85rem; opacity: 0.7;">
+                    © 2024 QuidWise. All rights reserved. | QuidWise Ltd Registered in England and Wales.
+                </p>
+                <p style="font-size: 0.75rem; opacity: 0.6; line-height: 1.5; margin-top: 0.5rem;">
+                    We aim to provide calculators and guides, but can't guarantee perfection. Use this information at your own risk. This is not financial advice—always research for your specific circumstances. While we link to other sites, we're not responsible for their content. Product prices and terms can change after publication, so always verify directly with providers. We can't investigate every company's financial stability, and there's always a risk of business failure.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="navigation.js"></script>
+    <script src="budget-planner.js"></script>
+</body>
+</html>
+
