@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const totalUpfront = stampDuty + adminFees + deposit;
 
         // Calculate 5-year comparison for different growth rates
-        const growthRates = [0, 0.01, 0.02, 0.03];
+        const growthRates = [-0.03, -0.015, 0, 0.015, 0.03];
         const comparisonData = growthRates.map(rate => 
             calculateFiveYearComparison(
                 propertyPrice,
@@ -200,9 +200,11 @@ document.addEventListener('DOMContentLoaded', function() {
         comparisonData.forEach(data => {
             const row = document.createElement('tr');
             const isBuyBetter = data.betterOption === 'Buy';
+            const percentageStr = (data.growthRate * 100).toFixed(1);
+            const displayPercentage = data.growthRate >= 0 ? `+${percentageStr}` : percentageStr;
             
             row.innerHTML = `
-                <td><strong>${(data.growthRate * 100).toFixed(0)}% per year</strong></td>
+                <td><strong>${displayPercentage}% per year</strong></td>
                 <td>£${data.futurePropertyValue.toLocaleString('en-GB', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</td>
                 <td>£${data.equity.toLocaleString('en-GB', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</td>
                 <td>£${data.netCostToBuy.toLocaleString('en-GB', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</td>
@@ -230,7 +232,11 @@ document.addEventListener('DOMContentLoaded', function() {
             comparisonChart.destroy();
         }
 
-        const labels = comparisonData.map(d => (d.growthRate * 100).toFixed(0) + '% Growth');
+        const labels = comparisonData.map(d => {
+            const percentageStr = (d.growthRate * 100).toFixed(1);
+            const displayPercentage = d.growthRate >= 0 ? `+${percentageStr}` : percentageStr;
+            return displayPercentage + '% Growth';
+        });
         const buyData = comparisonData.map(d => d.netCostToBuy);
         const rentData = comparisonData.map(d => d.netCostToRent);
 
