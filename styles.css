@@ -1991,5 +1991,51 @@ footer {
     .summary-amount {
         font-size: 1.5rem;
     }
+    
+    /* Mobile Compact Mode */
+    body {
+        font-size: 0.9rem;
+    }
+    
+    .input-group {
+        margin-bottom: 0.75rem;
+    }
+    
+    .input-group label {
+        font-size: 0.85rem;
+        margin-bottom: 0.25rem;
+    }
+    
+    .form-section {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .section-header h2 {
+        font-size: 1.1rem;
+    }
+    
+    input[type="number"],
+    input[type="text"],
+    select,
+    .select-input {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
+    }
+    
+    .input-with-symbol input {
+        padding-left: 1.75rem;
+        font-size: 0.9rem;
+    }
+    
+    .currency-symbol,
+    .percent-symbol {
+        font-size: 0.85rem;
+    }
+    
+    .calculate-btn {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.95rem;
+    }
 }
 
