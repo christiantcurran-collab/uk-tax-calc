@@ -71,15 +71,25 @@
                 
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link">
-                        Savings <i class="fas fa-chevron-down"></i>
+                        Savings & Loans <i class="fas fa-chevron-down"></i>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="isa-platforms.html">ISA Platforms</a></li>
+                        <li><a href="best-savings-rates.html">Savings Accounts</a></li>
+                        <li><a href="credit-cards.html">Credit Cards</a></li>
+                        <li><a href="loans.html">Loans</a></li>
                     </ul>
                 </li>
                 
-                <li class="nav-item">
-                    <a href="broadband-comparison.html" class="nav-link">Broadband</a>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        Bills <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="broadband-tv.html">Broadband & TV</a></li>
+                        <li><a href="energy.html">Energy</a></li>
+                        <li><a href="mobile.html">Mobile</a></li>
+                    </ul>
                 </li>
                 
                 <li class="nav-item">
@@ -314,54 +324,9 @@
                     </div>
                 </div>
 
-                <div class="breakdown">
-                    <h3><i class="fas fa-list-ul"></i> Detailed Breakdown</h3>
-                    
-                    <div class="breakdown-item">
-                        <span><i class="fas fa-money-check-alt"></i> Gross Salary</span>
-                        <span id="grossSalary">£0</span>
-                    </div>
-
-                    <div class="breakdown-item pension-item" id="pensionRow" style="display: none;">
-                        <span><i class="fas fa-piggy-bank"></i> Pension Contribution (Salary Sacrifice)</span>
-                        <span id="pensionAmount" class="negative">-£0</span>
-                    </div>
-
-                    <div class="breakdown-divider"></div>
-
-                    <div class="breakdown-item" id="adjustedGrossRow">
-                        <span><i class="fas fa-receipt"></i> Adjusted Gross Salary</span>
-                        <span id="adjustedGrossSalary">£0</span>
-                    </div>
-
-                    <div class="breakdown-divider"></div>
-
-                    <div class="breakdown-item tax-item">
-                        <span><i class="fas fa-file-invoice-dollar"></i> Income Tax</span>
-                        <span id="incomeTax" class="negative">-£0</span>
-                    </div>
-
-                    <div class="breakdown-item ni-item">
-                        <span><i class="fas fa-landmark"></i> National Insurance</span>
-                        <span id="nationalInsurance" class="negative">-£0</span>
-                    </div>
-
-                    <div class="breakdown-item student-item" id="studentLoanRow" style="display: none;">
-                        <span><i class="fas fa-graduation-cap"></i> Student Loan Repayment</span>
-                        <span id="studentLoanRepayment" class="negative">-£0</span>
-                    </div>
-
-                    <div class="breakdown-divider total-divider"></div>
-
-                    <div class="breakdown-item total">
-                        <span><i class="fas fa-wallet"></i> Net Pay</span>
-                        <span id="netPay">£0</span>
-                    </div>
-                </div>
-
                 <!-- Detailed Table Breakdown -->
                 <div class="table-breakdown">
-                    <h3><i class="fas fa-table"></i> Annual vs Monthly Breakdown</h3>
+                    <h3><i class="fas fa-table"></i> Annual / Monthly / Weekly Breakdown</h3>
                     <div class="table-responsive">
                         <table class="breakdown-table">
                             <thead>
@@ -369,6 +334,7 @@
                                     <th>Item</th>
                                     <th>Annual</th>
                                     <th>Monthly</th>
+                                    <th>Weekly</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -376,57 +342,51 @@
                                     <td><i class="fas fa-money-check-alt"></i> Gross Salary</td>
                                     <td id="tableGrossAnnual">£0</td>
                                     <td id="tableGrossMonthly">£0</td>
+                                    <td id="tableGrossWeekly">£0</td>
                                 </tr>
                                 <tr id="tablePensionRow" style="display: none;">
                                     <td><i class="fas fa-piggy-bank"></i> Pension Contribution</td>
                                     <td id="tablePensionAnnual" class="negative">-£0</td>
                                     <td id="tablePensionMonthly" class="negative">-£0</td>
+                                    <td id="tablePensionWeekly" class="negative">-£0</td>
                                 </tr>
                                 <tr class="subtotal-row" id="tableAdjustedRow">
                                     <td><strong>Adjusted Gross</strong></td>
                                     <td id="tableAdjustedAnnual"><strong>£0</strong></td>
                                     <td id="tableAdjustedMonthly"><strong>£0</strong></td>
+                                    <td id="tableAdjustedWeekly"><strong>£0</strong></td>
                                 </tr>
                                 <tr>
                                     <td><i class="fas fa-file-invoice-dollar"></i> Income Tax</td>
                                     <td id="tableTaxAnnual" class="negative">-£0</td>
                                     <td id="tableTaxMonthly" class="negative">-£0</td>
+                                    <td id="tableTaxWeekly" class="negative">-£0</td>
                                 </tr>
                                 <tr>
                                     <td><i class="fas fa-landmark"></i> National Insurance</td>
                                     <td id="tableNIAnnual" class="negative">-£0</td>
                                     <td id="tableNIMonthly" class="negative">-£0</td>
+                                    <td id="tableNIWeekly" class="negative">-£0</td>
                                 </tr>
                                 <tr id="tableStudentLoanRow" style="display: none;">
                                     <td><i class="fas fa-graduation-cap"></i> Student Loan</td>
                                     <td id="tableStudentLoanAnnual" class="negative">-£0</td>
                                     <td id="tableStudentLoanMonthly" class="negative">-£0</td>
+                                    <td id="tableStudentLoanWeekly" class="negative">-£0</td>
                                 </tr>
                                 <tr class="total-row">
                                     <td><strong><i class="fas fa-wallet"></i> Net Pay</strong></td>
                                     <td id="tableNetAnnual"><strong>£0</strong></td>
                                     <td id="tableNetMonthly"><strong>£0</strong></td>
+                                    <td id="tableNetWeekly"><strong>£0</strong></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <div class="monthly-breakdown" id="monthlyBreakdown" style="display: none;">
-                    <h3><i class="fas fa-calendar-alt"></i> Quick Monthly View</h3>
-                    <div class="breakdown-item">
-                        <span><i class="fas fa-coins"></i> Gross Monthly</span>
-                        <span id="monthlyGross">£0</span>
-                    </div>
-                    <div class="breakdown-item total">
-                        <span><i class="fas fa-wallet"></i> Net Monthly</span>
-                        <span id="monthlyNet">£0</span>
-                    </div>
-                </div>
-
                 <!-- Mortgage Affordability Quick View -->
                 <div class="info-box" id="mortgageAffordability" style="display: none; margin-top: 2rem; background: linear-gradient(135deg, rgba(26, 107, 92, 0.1) 0%, rgba(42, 139, 124, 0.1) 100%);">
-                    <i class="fas fa-home"></i>
                     <div>
                         <h3 style="margin: 0 0 0.5rem 0; color: var(--primary-color);">Your Estimated Mortgage Affordability</h3>
                         <p style="margin-bottom: 0.75rem;">Based on your annual income of <strong id="affordabilityIncome">£0</strong>, you could potentially borrow:</p>
@@ -448,7 +408,6 @@
 
                 <!-- What's Next Section -->
                 <div class="info-box" id="whatsNextSection" style="display: none; margin-top: 2rem; background: var(--bg-light);">
-                    <i class="fas fa-arrow-right"></i>
                     <div>
                         <h3 style="margin: 0 0 0.5rem 0;">What's Next?</h3>
                         <p style="margin-bottom: 1rem;">Now that you know your take-home pay, you might want to:</p>
@@ -467,9 +426,8 @@
 
         <div class="calculator-card">
             <div class="info-box">
-                <i class="fas fa-newspaper"></i>
                 <p>
-                    <strong>Latest Tax News:</strong> Rachel Reeves is preparing her Autumn Budget with plans for threshold freezes and property taxes. 
+                    <strong>Latest News:</strong> Rachel Reeves is preparing her Autumn Budget with plans for threshold freezes and property taxes. 
                     <a href="blog-budget-2025-autumn.html" style="color: var(--primary-color); font-weight: 600;">Read our full analysis of what to expect →</a>
                 </p>
             </div>

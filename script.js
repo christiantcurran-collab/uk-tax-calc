@@ -336,6 +336,7 @@ function displayResults(results, isAnnual, hasPension, hasStudentLoan) {
     // Populate the table breakdown
     document.getElementById('tableGrossAnnual').textContent = formatCurrency(results.annualGross);
     document.getElementById('tableGrossMonthly').textContent = formatCurrency(results.monthlyGross);
+    document.getElementById('tableGrossWeekly').textContent = formatCurrency(results.annualGross / 52);
     
     const tablePensionRow = document.getElementById('tablePensionRow');
     const tableAdjustedRow = document.getElementById('tableAdjustedRow');
@@ -345,32 +346,39 @@ function displayResults(results, isAnnual, hasPension, hasStudentLoan) {
         tableAdjustedRow.style.display = 'table-row';
         document.getElementById('tablePensionAnnual').textContent = '-' + formatCurrency(results.pensionContribution);
         document.getElementById('tablePensionMonthly').textContent = '-' + formatCurrency(results.pensionContribution / 12);
+        document.getElementById('tablePensionWeekly').textContent = '-' + formatCurrency(results.pensionContribution / 52);
         document.getElementById('tableAdjustedAnnual').innerHTML = '<strong>' + formatCurrency(results.adjustedGross) + '</strong>';
         document.getElementById('tableAdjustedMonthly').innerHTML = '<strong>' + formatCurrency(results.adjustedGross / 12) + '</strong>';
+        document.getElementById('tableAdjustedWeekly').innerHTML = '<strong>' + formatCurrency(results.adjustedGross / 52) + '</strong>';
     } else {
         tablePensionRow.style.display = 'none';
         tableAdjustedRow.style.display = 'table-row';
         document.getElementById('tableAdjustedAnnual').innerHTML = '<strong>' + formatCurrency(results.adjustedGross) + '</strong>';
         document.getElementById('tableAdjustedMonthly').innerHTML = '<strong>' + formatCurrency(results.adjustedGross / 12) + '</strong>';
+        document.getElementById('tableAdjustedWeekly').innerHTML = '<strong>' + formatCurrency(results.adjustedGross / 52) + '</strong>';
     }
     
     document.getElementById('tableTaxAnnual').textContent = '-' + formatCurrency(results.incomeTax);
     document.getElementById('tableTaxMonthly').textContent = '-' + formatCurrency(results.incomeTax / 12);
+    document.getElementById('tableTaxWeekly').textContent = '-' + formatCurrency(results.incomeTax / 52);
     
     document.getElementById('tableNIAnnual').textContent = '-' + formatCurrency(results.nationalInsurance);
     document.getElementById('tableNIMonthly').textContent = '-' + formatCurrency(results.nationalInsurance / 12);
+    document.getElementById('tableNIWeekly').textContent = '-' + formatCurrency(results.nationalInsurance / 52);
     
     const tableStudentLoanRow = document.getElementById('tableStudentLoanRow');
     if (hasStudentLoan && results.studentLoanRepayment > 0) {
         tableStudentLoanRow.style.display = 'table-row';
         document.getElementById('tableStudentLoanAnnual').textContent = '-' + formatCurrency(results.studentLoanRepayment);
         document.getElementById('tableStudentLoanMonthly').textContent = '-' + formatCurrency(results.studentLoanRepayment / 12);
+        document.getElementById('tableStudentLoanWeekly').textContent = '-' + formatCurrency(results.studentLoanRepayment / 52);
     } else {
         tableStudentLoanRow.style.display = 'none';
     }
     
     document.getElementById('tableNetAnnual').innerHTML = '<strong>' + formatCurrency(results.annualNet) + '</strong>';
     document.getElementById('tableNetMonthly').innerHTML = '<strong>' + formatCurrency(results.monthlyNet) + '</strong>';
+    document.getElementById('tableNetWeekly').innerHTML = '<strong>' + formatCurrency(results.annualNet / 52) + '</strong>';
     
     // Update monthly breakdown
     const monthlyBreakdown = document.getElementById('monthlyBreakdown');
