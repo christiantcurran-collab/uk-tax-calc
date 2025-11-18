@@ -9,6 +9,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const resultsSection = document.getElementById('results');
     const downloadBtn = document.getElementById('downloadExcel');
 
+    // Check if income is passed via URL parameter (monthly net income)
+    const urlParams = new URLSearchParams(window.location.search);
+    const passedIncome = urlParams.get('income');
+    if (passedIncome) {
+        // This is monthly net income from the tax calculator
+        document.getElementById('incomeEmployment').value = passedIncome;
+        // Auto-calculate if income is pre-filled
+        setTimeout(() => {
+            form.dispatchEvent(new Event('submit'));
+        }, 100);
+    }
+
     // Auto-calculate on input change
     const allInputs = document.querySelectorAll('input[type="number"]');
     allInputs.forEach(input => {

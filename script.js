@@ -382,6 +382,24 @@ function displayResults(results, isAnnual, hasPension, hasStudentLoan) {
         monthlyBreakdown.style.display = 'none';
     }
     
+    // Show mortgage affordability quick view
+    const mortgageAffordability = document.getElementById('mortgageAffordability');
+    const annualIncome = results.annualGross;
+    const lowEstimate = annualIncome * 4;
+    const highEstimate = annualIncome * 5.5;
+    
+    document.getElementById('affordabilityIncome').textContent = formatCurrency(annualIncome);
+    document.getElementById('affordabilityLow').textContent = formatCurrency(lowEstimate);
+    document.getElementById('affordabilityHigh').textContent = formatCurrency(highEstimate);
+    mortgageAffordability.style.display = 'block';
+    
+    // Set up links with income parameter
+    const mortgageAffordabilityLink = document.getElementById('mortgageAffordabilityLink');
+    const budgetPlannerLink = document.getElementById('budgetPlannerLink');
+    
+    mortgageAffordabilityLink.href = `mortgage-affordability.html?income=${Math.round(annualIncome)}`;
+    budgetPlannerLink.href = `budget-planner.html?income=${Math.round(results.monthlyNet)}`;
+    
     // Smooth scroll to results
     setTimeout(() => {
         resultsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });

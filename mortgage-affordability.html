@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8KXMNYDCS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-W8KXMNYDCS');
+    </script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9869727060387652"
+     crossorigin="anonymous"></script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate how much you can borrow for a mortgage based on your income. Simple mortgage affordability calculator for UK homebuyers.">
+    
+    <title>Mortgage Affordability Calculator | QuidWise</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="logo-link">
+                <div class="quidwise-logo">
+                    <img src="logo.svg" alt="QuidWise Logo" class="logo-image">
+                    <div class="logo-text-container">
+                        <span class="logo-text">QuidWise</span>
+                        <span class="logo-tagline">Make your pay go further</span>
+                    </div>
+                </div>
+            </a>
+            
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-menu">
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">Tax <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="income-tax-calculator.html">Income Tax Calculator</a></li>
+                        <li><a href="budget-planner.html">Budget Planner</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">Mortgage & Property <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="mortgage-calculator.html">Mortgage Calculator</a></li>
+                        <li><a href="mortgage-affordability.html">Mortgage Affordability</a></li>
+                        <li><a href="stamp-duty-calculator.html">Stamp Duty Calculator</a></li>
+                        <li><a href="find-mortgage-deals.html">Mortgage Rate Comparison</a></li>
+                        <li><a href="mortgage-overpayment.html">Mortgage Overpayment Calculator</a></li>
+                        <li><a href="buy-or-rent.html">Buy vs Rent Estimate</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">Savings <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="isa-platforms.html">ISA Platforms</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="broadband-comparison.html" class="nav-link">Broadband</a>
+                </li>
+                <li class="nav-item">
+                    <a href="blogs.html" class="nav-link">Blogs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" id="emailSignupBtn">Weekly Email</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-home"></i> Mortgage Affordability Calculator</h1>
+            <p class="subtitle">Find out how much you could borrow based on your income</p>
+        </header>
+
+        <div class="calculator-card">
+            <form id="affordabilityForm">
+                <div class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-user section-icon"></i>
+                        <h2>Your Income</h2>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="yourIncome"><i class="fas fa-pound-sign"></i> Your Annual Income (before tax)</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="yourIncome" name="yourIncome" placeholder="e.g., 40000" min="0" step="1000" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="partnerIncome"><i class="fas fa-user-friends"></i> Partner's Annual Income (optional)</label>
+                        <div class="input-with-symbol">
+                            <span class="currency-symbol">£</span>
+                            <input type="number" id="partnerIncome" name="partnerIncome" placeholder="e.g., 35000" min="0" step="1000" value="0">
+                        </div>
+                        <small style="color: var(--text-medium); display: block; margin-top: 0.25rem;">
+                            Leave as 0 if applying alone
+                        </small>
+                    </div>
+                </div>
+
+                <button type="submit" class="calculate-btn">
+                    <i class="fas fa-calculator"></i> Calculate Affordability
+                </button>
+            </form>
+
+            <div id="results" class="results-section" style="display: none;">
+                <div class="results-header">
+                    <i class="fas fa-home"></i>
+                    <h2>Your Mortgage Affordability</h2>
+                </div>
+
+                <div class="info-box" style="margin-bottom: 2rem;">
+                    <i class="fas fa-info-circle"></i>
+                    <p>This is an estimate based on standard lending criteria. Most lenders offer between 4x and 5.5x your annual income.</p>
+                </div>
+
+                <div class="breakdown">
+                    <h3><i class="fas fa-calculator"></i> Income Summary</h3>
+                    
+                    <div class="breakdown-item">
+                        <span><i class="fas fa-user"></i> Your Annual Income</span>
+                        <span id="displayYourIncome">£0</span>
+                    </div>
+
+                    <div class="breakdown-item" id="partnerIncomeRow" style="display: none;">
+                        <span><i class="fas fa-user-friends"></i> Partner's Annual Income</span>
+                        <span id="displayPartnerIncome">£0</span>
+                    </div>
+
+                    <div class="breakdown-divider"></div>
+
+                    <div class="breakdown-item total">
+                        <span><i class="fas fa-coins"></i> Total Household Income</span>
+                        <span id="totalIncome">£0</span>
+                    </div>
+                </div>
+
+                <div class="breakdown">
+                    <h3><i class="fas fa-home"></i> Estimated Borrowing Capacity</h3>
+                    
+                    <div class="breakdown-item">
+                        <span><i class="fas fa-arrow-down"></i> Conservative Estimate (4x income)</span>
+                        <span id="lowEstimate" style="font-size: 1.5rem; font-weight: bold; color: var(--primary-color);">£0</span>
+                    </div>
+
+                    <div class="breakdown-item">
+                        <span><i class="fas fa-arrow-up"></i> Higher Estimate (5.5x income)</span>
+                        <span id="highEstimate" style="font-size: 1.5rem; font-weight: bold; color: var(--success-color);">£0</span>
+                    </div>
+                </div>
+
+                <div class="info-box" style="margin-top: 2rem; background: var(--bg-light);">
+                    <i class="fas fa-lightbulb"></i>
+                    <p>
+                        <strong>Important:</strong> The actual amount you can borrow depends on many factors including:
+                    </p>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                        <li>Your credit score and history</li>
+                        <li>Monthly outgoings and commitments</li>
+                        <li>Employment type and stability</li>
+                        <li>Deposit size</li>
+                        <li>Property type and location</li>
+                    </ul>
+                    <p style="margin-top: 1rem;">
+                        <strong>A mortgage broker can provide a more accurate borrowing limit based on your specific circumstances.</strong>
+                    </p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;">
+                    <a href="mortgage-calculator.html" class="calculate-btn" style="text-align: center; text-decoration: none; background: var(--primary-light);">
+                        <i class="fas fa-calculator"></i> Calculate Monthly Payments
+                    </a>
+                    <a href="stamp-duty-calculator.html" class="calculate-btn" style="text-align: center; text-decoration: none; background: var(--primary-light);">
+                        <i class="fas fa-stamp"></i> Calculate Stamp Duty
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="calculator-card">
+            <div class="info-section">
+                <h2><i class="fas fa-question-circle"></i> How is Affordability Calculated?</h2>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <i class="fas fa-calculator"></i>
+                        <h3>Income Multiple</h3>
+                        <p>Lenders typically offer between 4 and 5.5 times your annual gross income. Single applicants and couples are both assessed this way.</p>
+                    </div>
+                    <div class="tip-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Affordability Checks</h3>
+                        <p>Beyond income multiples, lenders conduct detailed affordability assessments including stress tests at higher interest rates.</p>
+                    </div>
+                    <div class="tip-card">
+                        <i class="fas fa-coins"></i>
+                        <h3>Other Income</h3>
+                        <p>Bonuses, commission, and overtime can sometimes be included, though lenders may only count a percentage of these.</p>
+                    </div>
+                    <div class="tip-card">
+                        <i class="fas fa-credit-card"></i>
+                        <h3>Existing Commitments</h3>
+                        <p>Credit card balances, loans, and other financial commitments will reduce the amount you can borrow.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <p class="disclaimer">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Disclaimer:</strong> This calculator provides estimates only. Actual borrowing capacity depends on individual circumstances, credit history, and lender criteria. Always seek professional mortgage advice.
+                </p>
+                <p style="margin-top: 1rem; font-size: 0.85rem; opacity: 0.7;">
+                    © 2024 QuidWise. All rights reserved. | QuidWise Ltd Registered in England and Wales.
+                </p>
+                <p style="font-size: 0.75rem; opacity: 0.6; line-height: 1.5; margin-top: 0.5rem;">
+                    We aim to provide calculators and guides, but can't guarantee perfection. Use this information at your own risk. This is not financial advice—always research for your specific circumstances. While we link to other sites, we're not responsible for their content. Product prices and terms can change after publication, so always verify directly with providers. We can't investigate every company's financial stability, and there's always a risk of business failure.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="navigation.js"></script>
+    <script src="mortgage-affordability.js"></script>
+</body>
+</html>
+
