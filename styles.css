@@ -734,9 +734,15 @@ input[type="number"]:focus {
     border-bottom: 2px solid var(--border-dark);
 }
 
+.breakdown-table thead th:first-child {
+    width: 40%;
+}
+
 .breakdown-table thead th:nth-child(2),
-.breakdown-table thead th:nth-child(3) {
+.breakdown-table thead th:nth-child(3),
+.breakdown-table thead th:nth-child(4) {
     text-align: right;
+    width: 20%;
 }
 
 .breakdown-table tbody tr {
@@ -750,6 +756,7 @@ input[type="number"]:focus {
 
 .breakdown-table tbody td:first-child {
     font-weight: normal;
+    width: 40%;
 }
 
 .breakdown-table tbody td i {
@@ -757,9 +764,11 @@ input[type="number"]:focus {
 }
 
 .breakdown-table tbody td:nth-child(2),
-.breakdown-table tbody td:nth-child(3) {
+.breakdown-table tbody td:nth-child(3),
+.breakdown-table tbody td:nth-child(4) {
     text-align: right;
     font-weight: bold;
+    width: 20%;
 }
 
 .breakdown-table .highlight-row {
