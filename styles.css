@@ -2107,30 +2107,22 @@ footer {
 }
 
 /* Homepage Refinement Styles */
-.home-header {
-    text-align: center;
-    margin-bottom: 3rem;
-    padding: 2rem 0;
-}
-
-.home-header h1 {
-    font-size: 2.5rem;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-}
-
 .home-tools-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    gap: 2.5rem;
     margin-bottom: 3rem;
+    margin-top: 2rem;
 }
 
 .home-section {
     background: var(--bg-white);
-    padding: 2rem;
+    padding: 2.5rem;
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    min-height: 450px;
+    display: flex;
+    flex-direction: column;
 }
 
 .section-title {
@@ -2146,10 +2138,11 @@ footer {
     list-style: none;
     padding: 0;
     margin: 0;
+    flex: 1;
 }
 
 .compact-tool-list li {
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
 }
 
 .compact-tool-list a {
@@ -2275,22 +2268,24 @@ footer {
 
 /* Mobile Responsive for Homepage */
 @media (max-width: 768px) {
-    .home-header h1 {
-        font-size: 1.75rem;
-    }
-    
     .home-tools-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
         margin-bottom: 2rem;
+        margin-top: 1rem;
     }
     
     .home-section {
         padding: 1.5rem;
+        min-height: auto;
     }
     
     .section-title {
         font-size: 1.25rem;
+    }
+    
+    .compact-tool-list li {
+        margin-bottom: 0.75rem;
     }
     
     .featured-blog-link {
