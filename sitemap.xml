@@ -4,7 +4,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://www.quidwise.co.uk/</loc>
-    <lastmod>2025-11-19</lastmod>
+    <lastmod>2025-11-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -91,12 +91,19 @@
   <!-- Blog Hub -->
   <url>
     <loc>https://www.quidwise.co.uk/blogs.html</loc>
-    <lastmod>2025-11-19</lastmod>
+    <lastmod>2025-11-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   
   <!-- Blog Posts - Latest First -->
+  <url>
+    <loc>https://www.quidwise.co.uk/blog-sdlt-budget-changes.html</loc>
+    <lastmod>2025-11-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
   <url>
     <loc>https://www.quidwise.co.uk/blog-draft-excluder.html</loc>
     <lastmod>2025-11-19</lastmod>
