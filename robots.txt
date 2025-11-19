@@ -1,9 +1,4 @@
 User-agent: *
 Allow: /
 
-# Sitemap location
-Sitemap: https://quidwise.co.uk/sitemap.xml
-
-# Crawl delay (optional, helps prevent server overload)
-Crawl-delay: 1
-
+Sitemap: https://www.quidwise.co.uk/sitemap.xml
