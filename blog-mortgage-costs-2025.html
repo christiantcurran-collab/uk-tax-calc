@@ -22,6 +22,24 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* Desktop chart size */
+        .chart-container canvas {
+            max-height: 400px;
+        }
+        
+        /* Mobile chart size - double height */
+        @media (max-width: 768px) {
+            .chart-container canvas {
+                max-height: 600px !important;
+                height: 600px !important;
+            }
+            
+            .chart-container {
+                padding: 1rem !important;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -102,8 +120,8 @@
 
                 <h2>Three years of mortgage payment changes</h2>
                 
-                <div style="background: var(--bg-light); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
-                    <canvas id="mortgageChart" style="max-height: 400px;"></canvas>
+                <div class="chart-container" style="background: var(--bg-light); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
+                    <canvas id="mortgageChart"></canvas>
                 </div>
 
                 <h2>2023: The spike year</h2>
@@ -228,7 +246,7 @@
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: true,
+                    maintainAspectRatio: false,
                     plugins: {
                         legend: {
                             display: true,
