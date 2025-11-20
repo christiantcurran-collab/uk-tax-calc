@@ -2266,6 +2266,23 @@ footer {
     gap: 0.75rem;
 }
 
+/* National Average Display */
+.national-average {
+    display: inline-block;
+    margin-left: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    background: rgba(26, 107, 92, 0.1);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.national-average i {
+    margin-right: 0.25rem;
+    font-size: 0.75rem;
+}
+
 /* Mobile Responsive for Homepage */
 @media (max-width: 768px) {
     .home-tools-grid {

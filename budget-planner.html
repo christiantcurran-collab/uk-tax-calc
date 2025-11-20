@@ -126,6 +126,17 @@
                     </div>
                 </div>
 
+                <!-- UK NATIONAL AVERAGE AUTO-FILL -->
+                <div class="form-section" style="background: linear-gradient(135deg, rgba(26, 107, 92, 0.1) 0%, rgba(42, 139, 124, 0.1) 100%); border: 2px solid var(--primary-color);">
+                    <div class="input-group">
+                        <label class="checkbox-label" style="font-weight: 600; color: var(--primary-color);">
+                            <input type="checkbox" id="useNationalAverage">
+                            <span><i class="fas fa-chart-pie"></i> Auto-fill with UK National Average Spending (based on <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/personalandhouseholdfinances/expenditure" target="_blank" rel="noopener" style="color: var(--primary-color); text-decoration: underline;">ONS data</a>)</span>
+                        </label>
+                        <p class="help-text" style="margin-top: 0.5rem;">Tick this box to automatically populate your spending categories based on typical UK household spending patterns. You can adjust any amounts afterwards.</p>
+                    </div>
+                </div>
+
                 <!-- HOME SECTION -->
                 <div class="form-section">
                     <div class="section-header">
@@ -137,8 +148,9 @@
                         <label for="homeMortgageRent"><i class="fas fa-house-user"></i> Mortgage/Rent</label>
                         <div class="input-with-symbol">
                             <span class="currency-symbol">£</span>
-                            <input type="number" id="homeMortgageRent" class="expense-input" data-category="Home" placeholder="0" min="0" step="0.01" value="0">
+                            <input type="number" id="homeMortgageRent" class="expense-input" data-category="Home" data-national-pct="18" placeholder="0" min="0" step="0.01" value="0">
                         </div>
+                        <span class="national-average" id="avg-homeMortgageRent" style="display: none;"><i class="fas fa-chart-line"></i> UK avg: £0</span>
                     </div>
 
                     <div class="input-group">
@@ -147,6 +159,7 @@
                             <span class="currency-symbol">£</span>
                             <input type="number" id="homeGroundRent" class="expense-input" data-category="Home" placeholder="0" min="0" step="0.01" value="0">
                         </div>
+                        <span class="national-average" id="avg-homeGroundRent" style="display: none;"><i class="fas fa-chart-line"></i> UK avg: £0</span>
                     </div>
 
                     <div class="input-group">
@@ -155,6 +168,7 @@
                             <span class="currency-symbol">£</span>
                             <input type="number" id="homeCouncilTax" class="expense-input" data-category="Home" placeholder="0" min="0" step="0.01" value="0">
                         </div>
+                        <span class="national-average" id="avg-homeCouncilTax" style="display: none;"><i class="fas fa-chart-line"></i> UK avg: £0</span>
                     </div>
 
                     <div class="input-group">
@@ -163,6 +177,7 @@
                             <span class="currency-symbol">£</span>
                             <input type="number" id="homeGas" class="expense-input" data-category="Home" placeholder="0" min="0" step="0.01" value="0">
                         </div>
+                        <span class="national-average" id="avg-homeGas" style="display: none;"><i class="fas fa-chart-line"></i> UK avg: £0</span>
                     </div>
 
                     <div class="input-group">
@@ -171,6 +186,7 @@
                             <span class="currency-symbol">£</span>
                             <input type="number" id="homeElectricity" class="expense-input" data-category="Home" placeholder="0" min="0" step="0.01" value="0">
                         </div>
+                        <span class="national-average" id="avg-homeElectricity" style="display: none;"><i class="fas fa-chart-line"></i> UK avg: £0</span>
                     </div>
 
                     <div class="input-group">
@@ -179,6 +195,7 @@
                             <span class="currency-symbol">£</span>
                             <input type="number" id="homeInternet" class="expense-input" data-category="Home" placeholder="0" min="0" step="0.01" value="0">
                         </div>
+                        <span class="national-average" id="avg-homeInternet" style="display: none;"><i class="fas fa-chart-line"></i> UK avg: £0</span>
                     </div>
 
                     <div class="input-group">
@@ -187,6 +204,7 @@
                             <span class="currency-symbol">£</span>
                             <input type="number" id="homeTVLicense" class="expense-input" data-category="Home" placeholder="0" min="0" step="0.01" value="0">
                         </div>
+                        <span class="national-average" id="avg-homeTVLicense" style="display: none;"><i class="fas fa-chart-line"></i> UK avg: £0</span>
                     </div>
 
                     <div class="input-group">
@@ -219,6 +237,7 @@
                             <span class="currency-symbol">£</span>
                             <input type="number" id="insuranceLife" class="expense-input" data-category="Insurance" placeholder="0" min="0" step="0.01" value="0">
                         </div>
+                        <span class="national-average" id="avg-insuranceLife" style="display: none;"><i class="fas fa-chart-line"></i> UK avg: £0</span>
                     </div>
 
                     <div class="input-group">
@@ -259,6 +278,7 @@
                             <span class="currency-symbol">£</span>
                             <input type="number" id="insuranceOther" class="expense-input" data-category="Insurance" placeholder="0" min="0" step="0.01" value="0">
                         </div>
+                        <span class="national-average" id="avg-insuranceOther" style="display: none;"><i class="fas fa-chart-line"></i> UK avg: £0</span>
                     </div>
                 </div>
 
@@ -291,6 +311,7 @@
                             <span class="currency-symbol">£</span>
                             <input type="number" id="transportFuel" class="expense-input" data-category="Transport" placeholder="0" min="0" step="0.01" value="0">
                         </div>
+                        <span class="national-average" id="avg-transportFuel" style="display: none;"><i class="fas fa-chart-line"></i> UK avg: £0</span>
                     </div>
 
                     <div class="input-group">
@@ -315,6 +336,7 @@
                             <span class="currency-symbol">£</span>
                             <input type="number" id="transportPublic" class="expense-input" data-category="Transport" placeholder="0" min="0" step="0.01" value="0">
                         </div>
+                        <span class="national-average" id="avg-transportPublic" style="display: none;"><i class="fas fa-chart-line"></i> UK avg: £0</span>
                     </div>
 
                     <div class="input-group">
@@ -339,6 +361,7 @@
                             <span class="currency-symbol">£</span>
                             <input type="number" id="loanPersonal" class="expense-input" data-category="Loan Repayments" placeholder="0" min="0" step="0.01" value="0">
                         </div>
+                        <span class="national-average" id="avg-loanPersonal" style="display: none;"><i class="fas fa-chart-line"></i> UK avg: £0</span>
                     </div>
 
                     <div class="input-group">
@@ -355,6 +378,7 @@
                             <span class="currency-symbol">£</span>
                             <input type="number" id="loanCreditCard" class="expense-input" data-category="Loan Repayments" placeholder="0" min="0" step="0.01" value="0">
                         </div>
+                        <span class="national-average" id="avg-loanCreditCard" style="display: none;"><i class="fas fa-chart-line"></i> UK avg: £0</span>
                     </div>
 
                     <div class="input-group">
@@ -379,6 +403,7 @@
                             <span class="currency-symbol">£</span>
                             <input type="number" id="foodGroceries" class="expense-input" data-category="Food & Drink" placeholder="0" min="0" step="0.01" value="0">
                         </div>
+                        <span class="national-average" id="avg-foodGroceries" style="display: none;"><i class="fas fa-chart-line"></i> UK avg: £0</span>
                     </div>
 
                     <div class="input-group">
@@ -419,6 +444,7 @@
                             <span class="currency-symbol">£</span>
                             <input type="number" id="familyChildcare" class="expense-input" data-category="Family" placeholder="0" min="0" step="0.01" value="0">
                         </div>
+                        <span class="national-average" id="avg-familyChildcare" style="display: none;"><i class="fas fa-chart-line"></i> UK avg: £0</span>
                     </div>
 
                     <div class="input-group">
@@ -499,6 +525,7 @@
                             <span class="currency-symbol">£</span>
                             <input type="number" id="entertainmentHobbies" class="expense-input" data-category="Entertainment" placeholder="0" min="0" step="0.01" value="0">
                         </div>
+                        <span class="national-average" id="avg-entertainmentHobbies" style="display: none;"><i class="fas fa-chart-line"></i> UK avg: £0</span>
                     </div>
 
                     <div class="input-group">
@@ -579,6 +606,7 @@
                             <span class="currency-symbol">£</span>
                             <input type="number" id="clothesChildren" class="expense-input" data-category="Clothes" placeholder="0" min="0" step="0.01" value="0">
                         </div>
+                        <span class="national-average" id="avg-clothesChildren" style="display: none;"><i class="fas fa-chart-line"></i> UK avg: £0</span>
                     </div>
 
                     <div class="input-group">
@@ -603,6 +631,7 @@
                             <span class="currency-symbol">£</span>
                             <input type="number" id="educationCourses" class="expense-input" data-category="Education" placeholder="0" min="0" step="0.01" value="0">
                         </div>
+                        <span class="national-average" id="avg-educationCourses" style="display: none;"><i class="fas fa-chart-line"></i> UK avg: £0</span>
                     </div>
 
                     <div class="input-group">
@@ -765,6 +794,10 @@
     </script>
 </body>
 </html>
+
+
+
+
 
 
 

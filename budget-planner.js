@@ -4,10 +4,78 @@ let expensesPieChart = null;
 let incomeVsExpensesChart = null;
 let categoryBarChart = null;
 
+// UK National Average Spending Proportions (based on ONS Family Spending data)
+const nationalAveragePercentages = {
+    // HOME (28% total)
+    'homeMortgageRent': 18.0,      // Housing costs
+    'homeCouncilTax': 3.5,          // Council tax
+    'homeGas': 1.5,                 // Gas
+    'homeElectricity': 1.8,         // Electricity
+    'homeWater': 1.2,               // Water
+    'homeInternet': 1.0,            // Internet
+    'homeTVLicense': 0.5,           // TV License
+    'homeMaintenance': 0.5,         // Maintenance
+    
+    // INSURANCE (4% total)
+    'insuranceHome': 1.2,           // Home insurance
+    'insuranceLife': 1.5,           // Life insurance
+    'insuranceOther': 1.3,          // Other insurance
+    
+    // TRANSPORT (14% total)
+    'transportCarFinance': 3.5,     // Car finance
+    'transportFuel': 3.0,           // Fuel
+    'transportInsurance': 2.5,      // Car insurance
+    'transportPublic': 2.0,         // Public transport
+    'transportParking': 1.0,        // Parking
+    'transportMaintenance': 2.0,    // Maintenance/MOT
+    
+    // LOANS (3% total)
+    'loanPersonal': 1.5,            // Personal loans
+    'loanCreditCard': 1.0,          // Credit cards
+    'loanStudentLoan': 0.5,         // Student loan
+    
+    // FOOD & DRINK (11% total)
+    'foodGroceries': 8.0,           // Groceries
+    'foodTakeaway': 2.0,            // Takeaway
+    'foodDining': 1.0,              // Dining out
+    
+    // FAMILY (3% total)
+    'familyChildcare': 2.0,         // Childcare
+    'familySchool': 0.5,            // School costs
+    'familyPets': 0.5,              // Pet care
+    
+    // ENTERTAINMENT (11% total)
+    'entertainmentStreaming': 1.5,  // Streaming services
+    'entertainmentGym': 1.0,        // Gym membership
+    'entertainmentHobbies': 3.0,    // Hobbies
+    'entertainmentHolidays': 5.5,   // Holidays
+    
+    // HEALTH (2% total)
+    'healthPrescriptions': 0.5,     // Prescriptions
+    'healthDental': 0.5,            // Dental
+    'healthOptical': 0.3,           // Optical
+    'healthOther': 0.7,             // Other health
+    
+    // CLOTHES (4% total)
+    'clothesAdult': 2.5,            // Adult clothing
+    'clothesChildren': 1.5,         // Children clothing
+    
+    // EDUCATION (1% total)
+    'educationCourses': 0.5,        // Courses
+    'educationBooks': 0.3,          // Books
+    'educationOther': 0.2,          // Other education
+    
+    // OTHER (2% total)
+    'otherGifts': 0.8,              // Gifts
+    'otherCharity': 0.5,            // Charity
+    'otherMiscellaneous': 0.7       // Miscellaneous
+};
+
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('budgetForm');
     const resultsSection = document.getElementById('results');
     const downloadBtn = document.getElementById('downloadExcel');
+    const useNationalAverageCheckbox = document.getElementById('useNationalAverage');
 
     // Check if income is passed via URL parameter (monthly net income)
     const urlParams = new URLSearchParams(window.location.search);
@@ -19,6 +87,87 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             form.dispatchEvent(new Event('submit'));
         }, 100);
+    }
+
+    // National Average Checkbox Handler
+    if (useNationalAverageCheckbox) {
+        useNationalAverageCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                applyNationalAverages();
+            } else {
+                hideNationalAverages();
+            }
+        });
+    }
+
+    // Update national average displays when income changes
+    const incomeInputs = document.querySelectorAll('.income-input');
+    incomeInputs.forEach(input => {
+        input.addEventListener('input', function() {
+            if (useNationalAverageCheckbox && useNationalAverageCheckbox.checked) {
+                updateNationalAverageDisplays();
+            }
+        });
+    });
+
+    function applyNationalAverages() {
+        // Calculate total monthly income
+        const totalIncome = calculateTotalIncome();
+        
+        if (totalIncome === 0) {
+            alert('Please enter your monthly income first before using national averages.');
+            useNationalAverageCheckbox.checked = false;
+            return;
+        }
+
+        // Apply percentages to each field
+        Object.keys(nationalAveragePercentages).forEach(fieldId => {
+            const input = document.getElementById(fieldId);
+            if (input) {
+                const percentage = nationalAveragePercentages[fieldId];
+                const amount = (totalIncome * percentage) / 100;
+                input.value = amount.toFixed(2);
+            }
+        });
+
+        // Show and update national average displays
+        updateNationalAverageDisplays();
+        
+        // Trigger calculation
+        if (resultsSection.style.display === 'block') {
+            calculateBudget();
+        }
+    }
+
+    function updateNationalAverageDisplays() {
+        const totalIncome = calculateTotalIncome();
+        
+        Object.keys(nationalAveragePercentages).forEach(fieldId => {
+            const avgDisplay = document.getElementById('avg-' + fieldId);
+            if (avgDisplay) {
+                const percentage = nationalAveragePercentages[fieldId];
+                const amount = (totalIncome * percentage) / 100;
+                avgDisplay.textContent = `UK avg: £${amount.toFixed(2)}`;
+                avgDisplay.style.display = 'inline-block';
+            }
+        });
+    }
+
+    function hideNationalAverages() {
+        Object.keys(nationalAveragePercentages).forEach(fieldId => {
+            const avgDisplay = document.getElementById('avg-' + fieldId);
+            if (avgDisplay) {
+                avgDisplay.style.display = 'none';
+            }
+        });
+    }
+
+    function calculateTotalIncome() {
+        const incomeEmployment = parseFloat(document.getElementById('incomeEmployment').value) || 0;
+        const incomePension = parseFloat(document.getElementById('incomePension').value) || 0;
+        const incomeBenefits = parseFloat(document.getElementById('incomeBenefits').value) || 0;
+        const incomeOther = parseFloat(document.getElementById('incomeOther').value) || 0;
+        return incomeEmployment + incomePension + incomeBenefits + incomeOther;
     }
 
     // Auto-calculate on input change
