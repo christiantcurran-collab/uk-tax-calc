@@ -29,7 +29,100 @@ function collapseAll() {
     icons.forEach(icon => icon.classList.remove('rotated'));
 }
 
-// Payment functionality removed - download is now free for testing
+// Email Capture Modal Functions
+function showEmailCaptureModal() {
+    document.getElementById('emailCaptureModal').style.display = 'block';
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+}
+
+function closeEmailCaptureModal() {
+    document.getElementById('emailCaptureModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const modal = document.getElementById('emailCaptureModal');
+    if (event.target === modal) {
+        closeEmailCaptureModal();
+    }
+}
+
+// Handle Email Submission
+async function handleEmailSubmit(event) {
+    event.preventDefault();
+    
+    const email = document.getElementById('downloadEmail').value;
+    const submitButton = event.target.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton.innerHTML;
+    
+    // Show loading state
+    submitButton.disabled = true;
+    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Subscribing...</span>';
+    
+    try {
+        // Add to Mailchimp using JSONP
+        const mailchimpUrl = 'https://quidwise.us18.list-manage.com/subscribe/post-json';
+        const params = new URLSearchParams({
+            u: 'e025cbf9df423e6bfc42642a1',
+            id: '158f4d7246',
+            EMAIL: email,
+            c: 'mailchimpCallback'
+        });
+        
+        // Create callback function
+        window.mailchimpCallback = function(data) {
+            if (data.result === 'success' || data.msg.includes('already subscribed')) {
+                // Success or already subscribed - proceed with download
+                submitButton.innerHTML = '<i class="fas fa-check"></i> <span>Success! Downloading...</span>';
+                
+                setTimeout(() => {
+                    // Collect and download budget
+                    const budgetData = collectBudgetData();
+                    downloadPremiumExcel(budgetData);
+                    
+                    // Close modal
+                    closeEmailCaptureModal();
+                    
+                    // Reset form
+                    document.getElementById('emailCaptureForm').reset();
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = originalButtonText;
+                    
+                    // Show thank you message
+                    alert('✅ Thank you for subscribing! Your budget is downloading now. Check your email for our weekly finance tips!');
+                }, 1000);
+            } else {
+                // Error
+                throw new Error(data.msg || 'Subscription failed');
+            }
+        };
+        
+        // Create script tag for JSONP request
+        const script = document.createElement('script');
+        script.src = `${mailchimpUrl}?${params.toString()}`;
+        document.body.appendChild(script);
+        
+        // Clean up script after 5 seconds
+        setTimeout(() => {
+            document.body.removeChild(script);
+            delete window.mailchimpCallback;
+        }, 5000);
+        
+    } catch (error) {
+        console.error('Subscription error:', error);
+        alert('⚠️ There was an issue with the subscription. We\'ll download your budget anyway!');
+        
+        // Download anyway even if subscription fails
+        const budgetData = collectBudgetData();
+        downloadPremiumExcel(budgetData);
+        closeEmailCaptureModal();
+        
+        // Reset button
+        submitButton.disabled = false;
+        submitButton.innerHTML = originalButtonText;
+    }
+}
 
 function collectBudgetData() {
     const data = {

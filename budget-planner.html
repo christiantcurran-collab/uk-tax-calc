@@ -204,6 +204,72 @@
         .premium-download-btn i {
             font-size: 1.25rem;
         }
+        
+        /* Email Capture Modal */
+        .email-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            animation: fadeIn 0.3s;
+        }
+        
+        .email-modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 2.5rem;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            animation: slideDown 0.3s;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .email-modal-close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 20px;
+            position: absolute;
+            right: 1.5rem;
+            top: 1.5rem;
+        }
+        
+        .email-modal-close:hover,
+        .email-modal-close:focus {
+            color: #333;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .email-modal-content {
+                margin: 20% auto;
+                padding: 2rem 1.5rem;
+                width: 95%;
+            }
+        }
     </style>
     
     <!-- Structured Data - Calculator -->
@@ -282,6 +348,67 @@
       ]
     }
     </script>
+    
+    <!-- Structured Data - BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.quidwise.co.uk/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Budget Planner",
+          "item": "https://www.quidwise.co.uk/budget-planner.html"
+        }
+      ]
+    }
+    </script>
+    
+    <!-- Structured Data - HowTo -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to Create a Monthly Budget",
+      "description": "Step-by-step guide to creating and managing your monthly budget with QuidWise Budget Planner",
+      "image": "https://www.quidwise.co.uk/logo.svg",
+      "totalTime": "PT10M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Enter Your Income",
+          "text": "Start by entering all your monthly income sources including employment income, pension, benefits, and any other income. The planner automatically calculates your total monthly income.",
+          "position": 1
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Add Your Expenses",
+          "text": "Click on each expense category (Home, Transport, Food, etc.) and enter your monthly spending. You can expand each section to add detailed expenses or use the UK National Average auto-fill feature.",
+          "position": 2
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Review Your Budget",
+          "text": "Click Calculate Budget to see your total income vs expenses, spending breakdown by category, and visual charts showing where your money goes each month.",
+          "position": 3
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Download and Track",
+          "text": "Download your budget as a professionally formatted Excel spreadsheet to track your spending month-over-month and identify savings opportunities.",
+          "position": 4
+        }
+      ]
+    }
+    </script>
+    
     <script src="https://cdn.jsdelivr.net/npm/exceljs@4.3.0/dist/exceljs.min.js"></script>
 </head>
 <body>
@@ -1053,11 +1180,38 @@
                 <div style="text-align: center; margin-top: 2.5rem; padding: 2rem; background: linear-gradient(135deg, rgba(26, 107, 92, 0.05) 0%, rgba(42, 139, 124, 0.05) 100%); border-radius: 12px; border: 2px solid var(--primary-color);">
                     <h3 style="margin: 0 0 1rem 0; color: var(--primary-color);"><i class="fas fa-file-excel"></i> Download Your Budget</h3>
                     <p style="margin-bottom: 1.5rem; color: var(--text-medium);">Export your budget as a beautifully formatted Excel file with QuidWise branding, colors, and professional layout.</p>
-                    <button id="downloadExcelBtn" class="premium-download-btn" onclick="downloadPremiumExcel(collectBudgetData())">
+                    <button id="downloadExcelBtn" class="premium-download-btn" onclick="showEmailCaptureModal()">
                         <i class="fas fa-download"></i>
                         <span>Download as Excel</span>
                     </button>
-                    <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-medium);"><i class="fas fa-check-circle"></i> Free professional budget export</p>
+                    <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-medium);"><i class="fas fa-envelope"></i> Join our mailing list for free download</p>
+                </div>
+                
+                <!-- Email Capture Modal -->
+                <div id="emailCaptureModal" class="email-modal" style="display: none;">
+                    <div class="email-modal-content">
+                        <span class="email-modal-close" onclick="closeEmailCaptureModal()">&times;</span>
+                        <h2 style="color: var(--primary-color); margin-bottom: 1rem;"><i class="fas fa-envelope-open-text"></i> Get Your Free Budget Export</h2>
+                        <p style="margin-bottom: 1.5rem; color: var(--text-medium);">Join our mailing list to receive your professionally formatted Excel budget plus weekly UK personal finance tips and updates.</p>
+                        
+                        <form id="emailCaptureForm" onsubmit="handleEmailSubmit(event)">
+                            <div style="margin-bottom: 1rem;">
+                                <input type="email" id="downloadEmail" placeholder="Enter your email address" required style="width: 100%; padding: 0.75rem; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem;">
+                            </div>
+                            <div style="margin-bottom: 1rem; text-align: left;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: var(--text-medium);">
+                                    <input type="checkbox" id="agreeTerms" required>
+                                    <span>I agree to receive weekly emails from QuidWise (you can unsubscribe anytime)</span>
+                                </label>
+                            </div>
+                            <button type="submit" class="premium-download-btn" style="width: 100%; justify-content: center;">
+                                <i class="fas fa-download"></i>
+                                <span>Download My Budget</span>
+                            </button>
+                        </form>
+                        
+                        <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-medium);"><i class="fas fa-lock"></i> We respect your privacy. No spam, ever.</p>
+                    </div>
                 </div>
             </div>
         </div>
