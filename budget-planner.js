@@ -5,72 +5,84 @@ let incomeVsExpensesChart = null;
 let categoryBarChart = null;
 
 // UK National Average Spending Proportions (based on ONS Family Spending data)
+// Total must equal 100% so spending = income
 const nationalAveragePercentages = {
-    // HOME (51% total - reflects actual housing cost burden on net income)
-    'homeMortgageRent': 35.0,      // Housing costs (mortgage/rent)
+    // HOME (51% total)
+    'homeMortgageRent': 35.0,       // Mortgage/Rent
     'homeGroundRent': 1.0,          // Ground rent/service charge
     'homeCouncilTax': 4.0,          // Council tax
     'homeGas': 2.5,                 // Gas
     'homeElectricity': 3.0,         // Electricity
-    'homeWater': 2.0,               // Water
     'homeInternet': 1.5,            // Internet
-    'homeTVLicense': 0.5,           // TV License
-    'homeMobile': 0.5,              // Mobile
-    'homeMaintenance': 1.0,         // Maintenance
+    'homeTVLicense': 1.0,           // TV License
+    'homeTVSubs': 1.5,              // TV Subscriptions (Netflix, etc.)
+    'homeMobilePhone': 1.5,         // Mobile phone
     
-    // INSURANCE (3% total)
-    'insuranceHome': 1.0,           // Home insurance
-    'insuranceLife': 1.2,           // Life insurance
-    'insuranceOther': 0.8,          // Other insurance
+    // INSURANCE (6% total)
+    'insuranceLife': 2.0,           // Life insurance
+    'insuranceIncomeProtection': 1.0, // Income protection
+    'insuranceCriticalIllness': 0.5, // Critical illness
+    'insurancePet': 1.0,            // Pet insurance
+    'insuranceDental': 0.5,         // Dental insurance
+    'insuranceOther': 1.0,          // Other insurance
     
     // TRANSPORT (11% total)
-    'transportCarFinance': 3.0,     // Car finance
+    'transportCarInsurance': 2.0,   // Car insurance
+    'transportCarTax': 0.5,         // Car tax
     'transportFuel': 3.5,           // Fuel
-    'transportInsurance': 2.0,      // Car insurance
-    'transportPublic': 1.5,         // Public transport
-    'transportParking': 0.5,        // Parking
-    'transportMaintenance': 0.5,    // Maintenance/MOT
+    'transportServicing': 1.5,      // Servicing/MOT
+    'transportBreakdown': 0.5,      // Breakdown cover
+    'transportPublic': 2.0,         // Public transport
+    'transportOther': 1.0,          // Other transport
     
-    // LOANS (3% total)
+    // LOANS (4% total)
     'loanPersonal': 1.5,            // Personal loans
+    'loanCar': 1.0,                 // Car loan
     'loanCreditCard': 1.0,          // Credit cards
-    'loanStudentLoan': 0.5,         // Student loan
+    'loanOther': 0.5,               // Other loans
     
     // FOOD & DRINK (12% total)
-    'foodGroceries': 9.0,           // Groceries
-    'foodTakeaway': 2.0,            // Takeaway
-    'foodDining': 1.0,              // Dining out
+    'foodGroceries': 8.0,           // Groceries
+    'foodEatingOut': 1.5,           // Eating out
+    'foodLunchWork': 1.5,           // Lunch at work
+    'foodTakeaways': 1.0,           // Takeaways
     
-    // FAMILY (3% total)
-    'familyChildcare': 2.0,         // Childcare
-    'familySchool': 0.5,            // School costs
-    'familyPets': 0.5,              // Pet care
+    // FAMILY (5% total)
+    'familyChildcare': 1.5,         // Childcare
+    'familySchoolFees': 0.5,        // School fees
+    'familyActivities': 1.0,        // Children's activities
+    'familyMaintenance': 0.5,       // Child maintenance
+    'familyPetFood': 0.5,           // Pet food
+    'familyVetBills': 0.5,          // Vet bills
+    'familySchoolTrips': 0.5,       // School trips
     
-    // ENTERTAINMENT (8% total)
-    'entertainmentStreaming': 1.5,  // Streaming services
-    'entertainmentGym': 1.0,        // Gym membership
-    'entertainmentHobbies': 2.5,    // Hobbies
-    'entertainmentHolidays': 3.0,   // Holidays
+    // ENTERTAINMENT (5% total)
+    'entertainmentCinema': 0.5,     // Cinema
+    'entertainmentDaysOut': 1.0,    // Days out
+    'entertainmentHobbies': 1.5,    // Hobbies
+    'entertainmentAppSubs': 0.5,    // App subscriptions
+    'entertainmentSeasonTickets': 1.0, // Season tickets
+    'entertainmentGambling': 0.5,   // Gambling
     
     // HEALTH (2% total)
-    'healthPrescriptions': 0.5,     // Prescriptions
-    'healthDental': 0.6,            // Dental
-    'healthOptical': 0.4,           // Optical
-    'healthOther': 0.5,             // Other health
+    'healthFitness': 0.8,           // Gym/fitness
+    'healthHaircuts': 0.4,          // Haircuts/beauty
+    'healthDentistry': 0.4,         // Dentistry
+    'healthOpticians': 0.4,         // Opticians
     
-    // CLOTHES (3% total)
-    'clothesAdult': 2.0,            // Adult clothing
-    'clothesChildren': 1.0,         // Children clothing
+    // CLOTHES (2% total)
+    'clothesChildren': 1.0,         // Children's clothing
+    'clothesWork': 1.0,             // Work/adult clothing
     
     // EDUCATION (1% total)
-    'educationCourses': 0.5,        // Courses
-    'educationBooks': 0.3,          // Books
-    'educationOther': 0.2,          // Other education
+    'educationCourses': 0.4,        // Courses
+    'educationSchoolFees': 0.3,     // School fees (uniform, etc.)
+    'educationTuition': 0.3,        // Tuition/lessons
     
-    // OTHER (3% total)
-    'otherGifts': 1.2,              // Gifts
-    'otherCharity': 0.8,            // Charity
-    'otherMiscellaneous': 1.0       // Miscellaneous
+    // OTHER (1% total)
+    'otherHolidays': 0.4,           // Holidays
+    'otherChristmas': 0.3,          // Christmas/gifts
+    'otherHomeRefurb': 0.3          // Home improvements
 };
 
 document.addEventListener('DOMContentLoaded', function() {
