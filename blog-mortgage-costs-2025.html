@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8KXMNYDCS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-W8KXMNYDCS');
+    </script>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9869727060387652"
+     crossorigin="anonymous"></script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="How much did a £250k mortgage cost throughout 2025? Analysis of monthly repayments based on Bank of England interest rate data.">
+    
+    <title>How much did a £250k mortgage cost throughout 2025? | QuidWise Blog</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="logo-link">
+                <div class="quidwise-logo">
+                    <img src="logo.svg" alt="QuidWise Logo" class="logo-image">
+                    <div class="logo-text-container">
+                        <span class="logo-text">QuidWise</span>
+                        <span class="logo-tagline">Make your pay go further</span>
+                    </div>
+                </div>
+            </a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        Tax & Budgeting <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="income-tax-calculator.html">Income Tax Calculator</a></li>
+                        <li><a href="budget-planner.html">Budget Planner</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        Mortgages & Property <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="mortgage-calculator.html">Mortgage Calculator</a></li>
+                        <li><a href="mortgage-affordability.html">Mortgage Affordability</a></li>
+                        <li><a href="stamp-duty-calculator.html">Stamp Duty Calculator</a></li>
+                        <li><a href="find-mortgage-deals.html">Mortgage Rate Comparison</a></li>
+                        <li><a href="mortgage-overpayment.html">Mortgage Overpayment Calculator</a></li>
+                        <li><a href="buy-or-rent.html">Buy vs Rent Estimate</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        Bills <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="broadband-tv.html">Broadband & TV</a></li>
+                        <li><a href="energy.html">Energy</a></li>
+                        <li><a href="mobile.html">Mobile</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="blogs.html" class="nav-link">Blog</a>
+                </li>
+            </ul>
+            
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container blog-container">
+        <div class="blog-header">
+            <div class="blog-meta">
+                <span><i class="fas fa-calendar"></i> 17 November 2025</span>
+                <span><i class="fas fa-clock"></i> 5 min read</span>
+            </div>
+            <h1>How much did a £250k mortgage cost throughout 2025?</h1>
+            <p class="blog-intro">Mortgage rates fluctuated throughout 2025, affecting monthly repayments for homeowners. Here's how a typical £250,000 mortgage on a 30-year term varied month by month.</p>
+        </div>
+
+        <div class="calculator-card">
+            <div class="blog-content">
+                <p>Using <a href="https://wwwtest.bankofengland.co.uk/boeapps/database/" target="_blank" rel="noopener">Bank of England data</a> for 2-year fixed rate mortgages at 75% LTV, we've calculated what homeowners with a £250,000 mortgage on a 30-year term would have paid each month throughout 2025.</p>
+
+                <h2>Monthly repayment breakdown for 2025</h2>
+                
+                <div style="background: var(--bg-light); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
+                    <canvas id="mortgageChart" style="max-height: 400px;"></canvas>
+                </div>
+
+                <table class="comparison-table" style="margin: 2rem 0;">
+                    <thead>
+                        <tr>
+                            <th>Month</th>
+                            <th>Interest Rate</th>
+                            <th>Monthly Payment</th>
+                            <th>Annual Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>January 2025</td>
+                            <td>4.65%</td>
+                            <td><strong>£1,286</strong></td>
+                            <td>£15,432</td>
+                        </tr>
+                        <tr>
+                            <td>February 2025</td>
+                            <td>4.69%</td>
+                            <td><strong>£1,291</strong></td>
+                            <td>£15,492</td>
+                        </tr>
+                        <tr>
+                            <td>March 2025</td>
+                            <td>4.56%</td>
+                            <td><strong>£1,275</strong></td>
+                            <td>£15,300</td>
+                        </tr>
+                        <tr>
+                            <td>April 2025</td>
+                            <td>4.42%</td>
+                            <td><strong>£1,258</strong></td>
+                            <td>£15,096</td>
+                        </tr>
+                        <tr>
+                            <td>May 2025</td>
+                            <td>4.20%</td>
+                            <td><strong>£1,228</strong></td>
+                            <td>£14,736</td>
+                        </tr>
+                        <tr>
+                            <td>June 2025</td>
+                            <td>4.32%</td>
+                            <td><strong>£1,244</strong></td>
+                            <td>£14,928</td>
+                        </tr>
+                        <tr>
+                            <td>July 2025</td>
+                            <td>4.25%</td>
+                            <td><strong>£1,235</strong></td>
+                            <td>£14,820</td>
+                        </tr>
+                        <tr>
+                            <td>August 2025</td>
+                            <td>4.13%</td>
+                            <td><strong>£1,218</strong></td>
+                            <td>£14,616</td>
+                        </tr>
+                        <tr>
+                            <td>September 2025</td>
+                            <td>4.19%</td>
+                            <td><strong>£1,227</strong></td>
+                            <td>£14,724</td>
+                        </tr>
+                        <tr>
+                            <td>October 2025</td>
+                            <td>4.22%</td>
+                            <td><strong>£1,231</strong></td>
+                            <td>£14,772</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>Key findings</h2>
+                
+                <div class="info-box" style="margin: 1.5rem 0;">
+                    <div>
+                        <h3 style="margin: 0 0 1rem 0; color: var(--primary-color);">2025 Mortgage Cost Highlights</h3>
+                        <ul style="margin: 0; padding-left: 1.5rem;">
+                            <li><strong>Highest rate:</strong> 4.69% in February (£1,291/month)</li>
+                            <li><strong>Lowest rate:</strong> 4.13% in August (£1,218/month)</li>
+                            <li><strong>Average monthly payment:</strong> £1,249</li>
+                            <li><strong>Total range:</strong> £73/month difference between highest and lowest</li>
+                            <li><strong>Annual impact:</strong> £876 difference between best and worst months</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2>What this means for homeowners</h2>
+                
+                <p>The data shows that 2025 mortgage rates remained relatively stable compared to the volatility seen in 2022-2023, when rates peaked above 6%. However, even the small variations throughout the year demonstrate why timing matters when fixing a mortgage rate.</p>
+
+                <p>Those who secured a rate in August 2025 at 4.13% would save £876 annually compared to someone who fixed in February at 4.69% – a meaningful difference over a typical 2 or 5-year fixed term.</p>
+
+                <h2>Looking ahead</h2>
+                
+                <p>With the Bank of England continuing to adjust policy rates based on inflation data, mortgage rates are expected to remain responsive to economic conditions. Homeowners approaching the end of their fixed-rate term should monitor rates closely and consider securing a new deal 3-6 months in advance.</p>
+
+                <div class="info-box" style="margin-top: 2rem;">
+                    <p><strong>Calculate your own mortgage:</strong> Use our <a href="mortgage-calculator.html" style="color: var(--primary-color); font-weight: 600;">Mortgage Calculator</a> to work out monthly repayments based on current rates, or check our <a href="mortgage-affordability.html" style="color: var(--primary-color); font-weight: 600;">Mortgage Affordability Calculator</a> to see how much you could borrow.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p style="font-size: 0.85rem; opacity: 0.7; margin-bottom: 0.5rem;">
+                © 2024 QuidWise. All rights reserved. | QuidWise Ltd Registered in England and Wales.
+            </p>
+            <p style="font-size: 0.75rem; opacity: 0.6; line-height: 1.5; margin-top: 0.5rem;">
+                We aim to provide calculators and guides, but can't guarantee perfection. Use this information at your own risk. This is not financial advice—always research for your specific circumstances. While we link to other sites, we're not responsible for their content. Product prices and terms can change after publication, so always verify directly with providers. We can't investigate every company's financial stability, and there's always a risk of business failure.
+            </p>
+        </div>
+    </footer>
+
+    <script src="navigation.js"></script>
+    <script>
+        // Mortgage rates chart
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('mortgageChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+                    datasets: [{
+                        label: 'Monthly Payment (£)',
+                        data: [1286, 1291, 1275, 1258, 1228, 1244, 1235, 1218, 1227, 1231],
+                        borderColor: 'rgb(26, 107, 92)',
+                        backgroundColor: 'rgba(26, 107, 92, 0.1)',
+                        tension: 0.3,
+                        fill: true,
+                        pointRadius: 5,
+                        pointBackgroundColor: 'rgb(26, 107, 92)',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return 'Monthly Payment: £' + context.parsed.y.toLocaleString();
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 1200,
+                            max: 1300,
+                            ticks: {
+                                callback: function(value) {
+                                    return '£' + value;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
