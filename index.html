@@ -43,29 +43,41 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+        /* Force full width and reset everything */
+        body {
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        
         /* Override container widths for full-width layout */
         .container.home-container {
-            max-width: 100% !important;
+            max-width: none !important;
             width: 100% !important;
-            margin: 0 auto !important;
+            margin: 0 !important;
             padding: 0 !important;
+            background: transparent !important;
         }
         
         /* Center the calculators section with much wider layout */
         .home-tools-grid {
-            max-width: 1400px;
-            width: 90%;
-            margin: 2rem auto !important;
-            padding: 0;
+            max-width: 1400px !important;
+            width: 90% !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            margin-top: 2rem !important;
+            margin-bottom: 2rem !important;
+            padding: 0 !important;
+            display: block !important;
         }
         
         .home-section {
-            width: 100%;
-            margin: 0 auto;
+            width: 100% !important;
+            margin: 0 auto !important;
             background: white;
             padding: 2.5rem 3rem;
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: block !important;
         }
         
         .home-section .compact-tool-list {
@@ -110,9 +122,12 @@
         
         /* Center the blog section to match calculator width */
         .latest-blog-section {
-            max-width: 1400px;
-            width: 90%;
-            margin: 2rem auto !important;
+            max-width: 1400px !important;
+            width: 90% !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            margin-top: 2rem !important;
+            margin-bottom: 2rem !important;
         }
         
         @media (max-width: 1400px) {
