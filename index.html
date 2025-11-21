@@ -43,49 +43,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Center the calculators section */
+        /* Center the calculators section and match blog width */
         .home-tools-grid {
-            max-width: 600px;
+            max-width: 1000px;
             margin: 2rem auto;
         }
         
         .home-section {
             width: 100%;
-        }
-        
-        .home-hero {
-            text-align: center;
-            margin: 2rem auto 1rem;
-            max-width: 800px;
-            padding: 0 1rem;
-        }
-        
-        .home-hero h1 {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-weight: 700;
-            line-height: 1.2;
-        }
-        
-        .home-hero p {
-            font-size: 1.1rem;
-            color: var(--text-medium);
-            line-height: 1.6;
+            max-width: 1000px;
+            margin: 0 auto;
         }
         
         @media (max-width: 768px) {
             .home-tools-grid {
                 max-width: 100%;
                 margin: 1rem auto;
-            }
-            
-            .home-hero h1 {
-                font-size: 1.8rem;
-            }
-            
-            .home-hero p {
-                font-size: 1rem;
             }
         }
     </style>
@@ -203,17 +176,11 @@
     </nav>
 
     <div class="container home-container">
-        <!-- Main Heading -->
-        <div class="home-hero">
-            <h1>Free UK Financial Calculators</h1>
-            <p>Plan your finances with our easy-to-use calculators. Work out your income tax, mortgage payments, stamp duty, and budget planning in seconds.</p>
-        </div>
-
         <!-- Main Tools Grid -->
         <div class="home-tools-grid">
             <!-- Calculators Section -->
             <div class="home-section">
-                <h2 class="section-title"><i class="fas fa-calculator"></i> Our Calculators</h2>
+                <h2 class="section-title" style="text-align: center;"><i class="fas fa-calculator"></i> Our Calculators</h2>
                 <ul class="compact-tool-list">
                     <li><a href="income-tax-calculator.html"><i class="fas fa-chevron-right"></i> Income Tax Calculator</a></li>
                     <li><a href="budget-planner.html"><i class="fas fa-chevron-right"></i> Budget Planner</a></li>
