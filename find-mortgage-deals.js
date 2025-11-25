@@ -1,27 +1,60 @@
 // Find Mortgage Deals JavaScript
 
 // Mortgage deals data (November 2025 rates)
+// Sources: Rightmove, MoneyWeek, major UK lender rate sheets
+// Bank of England base rate: 4.75%
 const MORTGAGE_DEALS = [
-    // 2 Year Fixed
-    { lender: "Nationwide", rate: 3.64, term: 2, type: "Fixed", ltv: 60, fee: 999, aprc: 4.7, features: "Free valuation, £250 cashback" },
-    { lender: "Santander", rate: 3.81, term: 2, type: "Fixed", ltv: 75, fee: 999, aprc: 4.8, features: "Free valuation" },
-    { lender: "HSBC", rate: 3.89, term: 2, type: "Fixed", ltv: 60, fee: 999, aprc: 4.9, features: "Free valuation, £500 cashback" },
-    { lender: "Barclays", rate: 3.94, term: 2, type: "Fixed", ltv: 75, fee: 999, aprc: 5.0, features: "Free valuation" },
-    { lender: "NatWest", rate: 4.14, term: 2, type: "Fixed", ltv: 75, fee: 995, aprc: 5.1, features: "Free valuation" },
-    { lender: "Halifax", rate: 4.29, term: 2, type: "Fixed", ltv: 80, fee: 999, aprc: 5.2, features: "Free valuation" },
-    { lender: "TSB", rate: 4.49, term: 2, type: "Fixed", ltv: 85, fee: 995, aprc: 5.4, features: "Free valuation" },
-    { lender: "Lloyds", rate: 4.69, term: 2, type: "Fixed", ltv: 90, fee: 999, aprc: 5.6, features: "Free valuation" },
+    // 2 Year Fixed - 60% LTV (avg 3.79%)
+    { lender: "Barclays", rate: 3.74, term: 2, type: "Fixed", ltv: 60, fee: 899, aprc: 6.3, features: "Free valuation, no booking fee" },
+    { lender: "HSBC", rate: 3.79, term: 2, type: "Fixed", ltv: 60, fee: 999, aprc: 6.4, features: "Free valuation, £500 cashback" },
+    { lender: "Nationwide", rate: 3.84, term: 2, type: "Fixed", ltv: 60, fee: 999, aprc: 6.4, features: "Free valuation, £250 cashback" },
     
-    // 5 Year Fixed
-    { lender: "HSBC", rate: 4.09, term: 5, type: "Fixed", ltv: 60, fee: 999, aprc: 5.0, features: "Free valuation, £500 cashback" },
-    { lender: "Santander", rate: 4.14, term: 5, type: "Fixed", ltv: 60, fee: 999, aprc: 5.1, features: "Free valuation, £250 cashback" },
-    { lender: "Barclays", rate: 4.19, term: 5, type: "Fixed", ltv: 60, fee: 999, aprc: 5.1, features: "Free valuation" },
-    { lender: "Nationwide", rate: 4.24, term: 5, type: "Fixed", ltv: 75, fee: 999, aprc: 5.2, features: "Free legal fees for remortgage" },
-    { lender: "NatWest", rate: 4.34, term: 5, type: "Fixed", ltv: 75, fee: 995, aprc: 5.3, features: "Free valuation" },
-    { lender: "Halifax", rate: 4.49, term: 5, type: "Fixed", ltv: 80, fee: 999, aprc: 5.4, features: "Free valuation" },
-    { lender: "TSB", rate: 4.69, term: 5, type: "Fixed", ltv: 85, fee: 995, aprc: 5.6, features: "Free valuation" },
-    { lender: "Lloyds", rate: 4.89, term: 5, type: "Fixed", ltv: 90, fee: 999, aprc: 5.8, features: "Free valuation" },
-    { lender: "Nationwide", rate: 5.19, term: 5, type: "Fixed", ltv: 95, fee: 999, aprc: 6.1, features: "First-time buyer, free valuation" },
+    // 2 Year Fixed - 75% LTV (avg 4.14%)
+    { lender: "Santander", rate: 4.09, term: 2, type: "Fixed", ltv: 75, fee: 999, aprc: 6.5, features: "Free valuation" },
+    { lender: "NatWest", rate: 4.14, term: 2, type: "Fixed", ltv: 75, fee: 995, aprc: 6.5, features: "Free valuation" },
+    { lender: "Barclays", rate: 4.19, term: 2, type: "Fixed", ltv: 75, fee: 899, aprc: 6.5, features: "Free valuation" },
+    
+    // 2 Year Fixed - 85% LTV (avg 4.27%)
+    { lender: "Halifax", rate: 4.24, term: 2, type: "Fixed", ltv: 85, fee: 999, aprc: 6.6, features: "Free valuation" },
+    { lender: "TSB", rate: 4.29, term: 2, type: "Fixed", ltv: 85, fee: 995, aprc: 6.6, features: "Free valuation" },
+    { lender: "Nationwide", rate: 4.34, term: 2, type: "Fixed", ltv: 85, fee: 999, aprc: 6.7, features: "Free valuation" },
+    
+    // 2 Year Fixed - 90% LTV (avg 4.54%)
+    { lender: "Lloyds", rate: 4.49, term: 2, type: "Fixed", ltv: 90, fee: 999, aprc: 6.8, features: "Free valuation" },
+    { lender: "Halifax", rate: 4.54, term: 2, type: "Fixed", ltv: 90, fee: 999, aprc: 6.8, features: "Free valuation" },
+    { lender: "NatWest", rate: 4.59, term: 2, type: "Fixed", ltv: 90, fee: 995, aprc: 6.9, features: "Free valuation" },
+    
+    // 2 Year Fixed - 95% LTV (avg 5.11%)
+    { lender: "Nationwide", rate: 5.04, term: 2, type: "Fixed", ltv: 95, fee: 999, aprc: 7.1, features: "First-time buyer, free valuation" },
+    { lender: "Halifax", rate: 5.14, term: 2, type: "Fixed", ltv: 95, fee: 999, aprc: 7.2, features: "First-time buyer, free valuation" },
+    { lender: "Lloyds", rate: 5.19, term: 2, type: "Fixed", ltv: 95, fee: 999, aprc: 7.2, features: "First-time buyer, free valuation" },
+    
+    // 5 Year Fixed - 60% LTV (avg 3.95%, Barclays at 3.82%)
+    { lender: "Barclays", rate: 3.82, term: 5, type: "Fixed", ltv: 60, fee: 899, aprc: 5.8, features: "Free valuation, rate lock guarantee" },
+    { lender: "HSBC", rate: 3.89, term: 5, type: "Fixed", ltv: 60, fee: 999, aprc: 5.9, features: "Free valuation, £500 cashback" },
+    { lender: "Santander", rate: 3.94, term: 5, type: "Fixed", ltv: 60, fee: 999, aprc: 5.9, features: "Free valuation, £250 cashback" },
+    { lender: "Nationwide", rate: 3.99, term: 5, type: "Fixed", ltv: 60, fee: 999, aprc: 5.9, features: "Free legal fees for remortgage" },
+    
+    // 5 Year Fixed - 75% LTV (avg 4.24%)
+    { lender: "Barclays", rate: 4.14, term: 5, type: "Fixed", ltv: 75, fee: 899, aprc: 6.1, features: "Free valuation" },
+    { lender: "NatWest", rate: 4.19, term: 5, type: "Fixed", ltv: 75, fee: 995, aprc: 6.1, features: "Free valuation" },
+    { lender: "Nationwide", rate: 4.24, term: 5, type: "Fixed", ltv: 75, fee: 999, aprc: 6.2, features: "Free legal fees for remortgage" },
+    { lender: "Santander", rate: 4.29, term: 5, type: "Fixed", ltv: 75, fee: 999, aprc: 6.2, features: "Free valuation" },
+    
+    // 5 Year Fixed - 85% LTV (avg 4.32%)
+    { lender: "Halifax", rate: 4.29, term: 5, type: "Fixed", ltv: 85, fee: 999, aprc: 6.3, features: "Free valuation" },
+    { lender: "TSB", rate: 4.34, term: 5, type: "Fixed", ltv: 85, fee: 995, aprc: 6.3, features: "Free valuation" },
+    { lender: "Lloyds", rate: 4.39, term: 5, type: "Fixed", ltv: 85, fee: 999, aprc: 6.4, features: "Free valuation" },
+    
+    // 5 Year Fixed - 90% LTV (avg 4.52%)
+    { lender: "Lloyds", rate: 4.49, term: 5, type: "Fixed", ltv: 90, fee: 999, aprc: 6.5, features: "Free valuation" },
+    { lender: "Halifax", rate: 4.54, term: 5, type: "Fixed", ltv: 90, fee: 999, aprc: 6.5, features: "Free valuation" },
+    { lender: "NatWest", rate: 4.59, term: 5, type: "Fixed", ltv: 90, fee: 995, aprc: 6.6, features: "Free valuation" },
+    
+    // 5 Year Fixed - 95% LTV (avg 5.00%)
+    { lender: "Nationwide", rate: 4.94, term: 5, type: "Fixed", ltv: 95, fee: 999, aprc: 6.9, features: "First-time buyer, free valuation" },
+    { lender: "Halifax", rate: 5.04, term: 5, type: "Fixed", ltv: 95, fee: 999, aprc: 6.9, features: "First-time buyer, free valuation" },
+    { lender: "Lloyds", rate: 5.09, term: 5, type: "Fixed", ltv: 95, fee: 999, aprc: 7.0, features: "First-time buyer, free valuation" },
 ];
 
 document.addEventListener('DOMContentLoaded', function() {
