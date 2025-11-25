@@ -1,19 +1,28 @@
 #!/usr/bin/env python3
 """
-Generate individual calculator pages for salaries from £20,000 to £70,000 in £500 intervals.
-Each page will be pre-filled with the salary amount and include comprehensive SEO optimization.
+Regenerate income tax calculator pages with correct calculations.
+Uses the same logic as the JavaScript calculator (with 5% pension by default).
 """
 
 import os
 import math
 
-def calculate_net_pay(gross_salary, tax_year='2025/26'):
-    """Calculate net pay after tax and NI for a given gross salary"""
-    # Personal allowance for 2025/26
+def calculate_net_pay(salary, tax_year='2025/26', has_pension=False, pension_percentage=0):
+    """Calculate net pay using the same logic as the JavaScript calculator (NO pension by default)"""
+
+    # Personal allowance
     personal_allowance = 12570
 
+    # Calculate pension contribution (NONE by default to match the calculator)
+    annual_pension_contribution = 0
+    if has_pension:
+        annual_pension_contribution = (salary * pension_percentage) / 100
+
+    # Adjusted gross salary (after pension deduction if any)
+    adjusted_gross = salary - annual_pension_contribution
+
     # Calculate taxable income
-    taxable_income = max(0, gross_salary - personal_allowance)
+    taxable_income = max(0, adjusted_gross - personal_allowance)
 
     # Calculate income tax
     tax = 0
@@ -26,20 +35,28 @@ def calculate_net_pay(gross_salary, tax_year='2025/26'):
         higher_rate_amount = max(0, taxable_income - 37700)
         tax += higher_rate_amount * 0.40
 
-    # Calculate National Insurance (8% between £12,570 and £50,270)
+    # Calculate National Insurance (8% between £12,570 and £50,270, then 2% above)
     ni_threshold = 12570
     ni_upper_limit = 50270
     ni = 0
 
-    if gross_salary > ni_threshold:
-        ni_earnings = min(gross_salary, ni_upper_limit) - ni_threshold
-        ni += ni_earnings * 0.08
+    if adjusted_gross > ni_threshold:
+        # 8% on earnings between threshold and upper limit
+        ni_earnings_basic = min(adjusted_gross, ni_upper_limit) - ni_threshold
+        ni += ni_earnings_basic * 0.08
+        
+        # 2% on earnings above upper limit
+        if adjusted_gross > ni_upper_limit:
+            ni_earnings_upper = adjusted_gross - ni_upper_limit
+            ni += ni_earnings_upper * 0.02
 
-    # Net pay
-    net_pay = gross_salary - tax - ni
+    # Calculate net pay
+    net_pay = adjusted_gross - tax - ni
 
     return {
-        'gross': gross_salary,
+        'gross': salary,
+        'pension': round(annual_pension_contribution, 2),
+        'adjusted_gross': round(adjusted_gross, 2),
         'tax': round(tax, 2),
         'ni': round(ni, 2),
         'net': round(net_pay, 2),
@@ -47,24 +64,18 @@ def calculate_net_pay(gross_salary, tax_year='2025/26'):
         'weekly': round(net_pay / 52, 2)
     }
 
-def format_currency(amount):
-    """Format amount as currency"""
-    return f"£{amount:,.0f}" if amount >= 100 else f"£{amount:,.2f}"
+def get_seo_keywords(salary):
+    """Generate SEO keywords for a specific salary amount"""
+    salary_str = str(salary)
+    salary_short = salary_str[:-3] + 'k'  # e.g., 30000 -> 30k
 
-def generate_page_content(salary_amount, calculations):
-    """Generate the HTML content for a specific salary page"""
-
-    salary_str = str(salary_amount)
-    salary_short = salary_str[:-3] + 'k'  # e.g., 25000 -> 25k
-
-    # SEO keywords based on the example provided
     keywords = [
         f"{salary_short} take home pay",
         f"{salary_short} net salary",
         f"{salary_str} per year net income",
         f"{salary_short} gross salary how much net",
         f"{salary_str} gross to net UK",
-        f"{salary_str},000 take home London",
+        f"{salary_str} take home London",
         f"{salary_str} a year after tax",
         f"{salary_str} annual salary take home per month",
         f"{salary_short} salary monthly take home",
@@ -72,7 +83,7 @@ def generate_page_content(salary_amount, calculations):
         f"{salary_str} salary after tax calculator UK",
         f"{salary_short} take home pay calculator",
         "net salary calculator " + salary_str,
-        f"{salary_str} income tax calculator [your country]",
+        f"{salary_str} income tax calculator",
         f"{salary_str} salary after tax UK 2025/26",
         f"{salary_str} take home pay this tax year",
         f"{salary_short} salary after tax current year UK",
@@ -81,11 +92,21 @@ def generate_page_content(salary_amount, calculations):
         f"What is the take home pay on a {salary_str} salary?"
     ]
 
-    # Create meta description
-    meta_description = f"What's the take home pay on a {format_currency(salary_amount)} salary in England 2025/26? Calculate your exact net income after tax and National Insurance. Net pay: {format_currency(calculations['net'])} annually."
+    return keywords
 
-    # Create title
-    title = f"{format_currency(salary_amount)} Salary Take Home Pay Calculator UK 2025/26 | QuidWise"
+def generate_page_content(salary_amount, calculations):
+    """Generate the HTML content for a specific income tax calculator page"""
+
+    salary_str = str(salary_amount)
+    salary_short = salary_str[:-3] + 'k'
+
+    keywords = get_seo_keywords(salary_amount)
+
+    # Meta description - emphasize monthly take-home
+    meta_description = f"What's the take home pay on a {format_currency(salary_amount)} salary in England 2025/26? Monthly take-home: £{calculations['monthly']:,.0f}. Calculate your exact net income after tax and National Insurance."
+
+    # Title
+    title = f"£{salary_amount:,} Salary Take Home Pay Calculator UK 2025/26 | QuidWise"
 
     html_content = f"""<!DOCTYPE html>
 <html lang="en">
@@ -136,7 +157,7 @@ def generate_page_content(salary_amount, calculations):
     {{
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      "name": "{format_currency(salary_amount)} Salary Calculator",
+      "name": "£{salary_amount:,} Salary Calculator",
       "applicationCategory": "FinanceApplication",
       "operatingSystem": "Any",
       "description": "{meta_description}",
@@ -207,61 +228,69 @@ def generate_page_content(salary_amount, calculations):
 
     <div class="container">
         <div class="calculator-header">
-            <h1><i class="fas fa-calculator"></i> {format_currency(salary_amount)} Salary Calculator</h1>
+            <h1><i class="fas fa-calculator"></i> £{salary_amount:,} Salary Calculator</h1>
             <p class="subtitle">Calculate your take-home pay after tax and National Insurance for 2025/26</p>
         </div>
 
         <div class="calculator-results">
             <div class="result-card">
                 <div class="result-header">
-                    <h2>{format_currency(salary_amount)} Annual Salary Breakdown</h2>
+                    <h2>£{salary_amount:,} Annual Salary Breakdown</h2>
+                </div>
+
+                <!-- Monthly Net Pay - Featured prominently -->
+                <div class="monthly-highlight" style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%); color: white; padding: 1.5rem; border-radius: 12px; text-align: center; margin-bottom: 1.5rem;">
+                    <div style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 0.25rem;">Monthly Take-Home Pay</div>
+                    <div style="font-size: 2.5rem; font-weight: bold;">£{calculations['monthly']:,.0f}</div>
+                    <div style="font-size: 0.85rem; opacity: 0.8; margin-top: 0.25rem;">per month after tax</div>
                 </div>
 
                 <div class="salary-breakdown">
                     <div class="breakdown-item">
                         <span class="label">Gross Salary:</span>
-                        <span class="value gross">{format_currency(calculations['gross'])}</span>
+                        <span class="value gross">£{salary_amount:,}</span>
                     </div>
 
                     <div class="breakdown-item">
                         <span class="label">Income Tax:</span>
-                        <span class="value tax">-{format_currency(calculations['tax'])}</span>
+                        <span class="value tax">-£{calculations['tax']:,.0f}</span>
                     </div>
 
                     <div class="breakdown-item">
                         <span class="label">National Insurance:</span>
-                        <span class="value ni">-{format_currency(calculations['ni'])}</span>
+                        <span class="value ni">-£{calculations['ni']:,.0f}</span>
                     </div>
 
                     <div class="breakdown-item total">
-                        <span class="label">Net Take-Home Pay:</span>
-                        <span class="value net">{format_currency(calculations['net'])}</span>
+                        <span class="label">Annual Net Pay:</span>
+                        <span class="value net">£{calculations['net']:,.0f}</span>
                     </div>
                 </div>
 
                 <div class="frequency-breakdown">
                     <div class="freq-item">
                         <span class="freq-label">Monthly:</span>
-                        <span class="freq-value">{format_currency(calculations['monthly'])}</span>
+                        <span class="freq-value">£{calculations['monthly']:,.0f}</span>
                     </div>
                     <div class="freq-item">
                         <span class="freq-label">Weekly:</span>
-                        <span class="freq-value">{format_currency(calculations['weekly'])}</span>
+                        <span class="freq-value">£{calculations['weekly']:,.0f}</span>
                     </div>
                 </div>
             </div>
 
             <div class="calculator-info">
-                <h3>Understanding Your {format_currency(salary_amount)} Salary</h3>
-                <p>With a gross salary of {format_currency(salary_amount)}, you'll take home {format_currency(calculations['net'])} annually after deductions for income tax ({format_currency(calculations['tax'])}) and National Insurance ({format_currency(calculations['ni'])}).</p>
+                <h3>Understanding Your £{salary_amount:,} Salary</h3>
+                <p>With a gross salary of £{salary_amount:,}, you'll take home <strong>£{calculations['monthly']:,.0f} per month</strong> (£{calculations['net']:,.0f} annually) after income tax (£{calculations['tax']:,.0f}) and National Insurance (£{calculations['ni']:,.0f}) deductions.</p>
 
                 <div class="key-points">
                     <h4>Key Points:</h4>
                     <ul>
                         <li><strong>Tax Year:</strong> 2025/26 (England)</li>
                         <li><strong>Personal Allowance:</strong> £12,570</li>
-                        <li><strong>Tax Rate:</strong> 20% basic rate</li>
-                        <li><strong>NI Threshold:</strong> £12,570 - £50,270</li>
+                        <li><strong>Basic Rate Tax:</strong> 20% on £12,571-£50,270</li>
+                        <li><strong>Higher Rate Tax:</strong> 40% on £50,271-£125,140</li>
+                        <li><strong>NI Rate:</strong> 8% (£12,571-£50,270), 2% above</li>
                     </ul>
                 </div>
 
@@ -291,7 +320,7 @@ def generate_page_content(salary_amount, calculations):
             <div class="footer-content">
                 <p class="disclaimer">
                     <i class="fas fa-info-circle"></i>
-                    <strong>Disclaimer:</strong> Tax year 2025/26. This calculator is for estimation purposes only. Actual deductions may vary based on your tax code and other circumstances.
+                    <strong>Disclaimer:</strong> Tax year 2025/26. This calculation is for estimation purposes only. Actual take-home pay may vary based on your specific tax code, pension contributions, and other circumstances.
                 </p>
                 <div class="footer-badges">
                     <span class="badge"><i class="fas fa-shield-alt"></i> Privacy-First</span>
@@ -315,22 +344,28 @@ def generate_page_content(salary_amount, calculations):
 
     return html_content
 
-def main():
-    """Generate all calculator pages"""
-    # Create salary amounts from 20000 to 70000 in £500 intervals
-    salaries = []
-    for amount in range(20000, 70001, 500):
-        salaries.append(amount)
+def format_currency(amount):
+    """Format amount as currency"""
+    return f"£{amount:,.0f}" if amount >= 100 else f"£{amount:,.2f}"
 
-    print(f"Generating {len(salaries)} calculator pages...")
+def main():
+    """Regenerate all income tax calculator pages with correct calculations"""
+
+    print("Regenerating income tax calculator pages with correct calculations...")
 
     # Create output directory if it doesn't exist
     output_dir = "income-tax-calculator"
     os.makedirs(output_dir, exist_ok=True)
 
-    # Generate each page
+    # Generate salary amounts from 20000 to 70000 in £500 intervals
+    salaries = []
+    for amount in range(20000, 70001, 500):
+        salaries.append(amount)
+
+    # Regenerate each page
     for salary in salaries:
-        calculations = calculate_net_pay(salary)
+        # Calculate with NO pension (to match calculator default state)
+        calculations = calculate_net_pay(salary, has_pension=False, pension_percentage=0)
 
         # Generate page content
         content = generate_page_content(salary, calculations)
@@ -342,11 +377,11 @@ def main():
         with open(filepath, 'w', encoding='utf-8') as f:
             f.write(content)
 
-        print(f"Generated: {filename} - Net pay: £{calculations['net']:,.0f}")
+        print(f"Regenerated: {filename} - Net: £{calculations['net']:,} (Monthly: £{calculations['monthly']:,})")
 
-    print(f"\n✅ Successfully generated {len(salaries)} calculator pages!")
+    print(f"\nSuccessfully regenerated {len(salaries)} income tax calculator pages!")
     print(f"Pages saved in: {output_dir}/")
-    print(f"URL format: quidwise.co.uk/income-tax-calculator/[amount]")
+    print("All pages now calculated WITHOUT pension contributions (matching calculator default).")
 
 if __name__ == "__main__":
     main()

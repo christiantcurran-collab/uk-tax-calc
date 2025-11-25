@@ -513,7 +513,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Calculate net pay
         const results = calculateNetPay(formData);
         
-        // Display results (always annual now)
-        displayResults(results, true, hasPension, hasChildcareVouchers, studentLoanPlan !== 'none');
+        // Display results (show monthly net pay instead of annual)
+        displayResults(results, false, hasPension, hasChildcareVouchers, studentLoanPlan !== 'none');
     });
 });
