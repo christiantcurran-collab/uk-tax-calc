@@ -2854,6 +2854,41 @@ input[type="number"]:focus {
     color: var(--text-dark);
 }
 
+/* Location Toggle - England/Scotland */
+.toggle-between {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.toggle-option {
+    font-size: 0.85rem;
+    color: var(--text-medium);
+    transition: all 0.2s ease;
+    padding: 0.2rem 0;
+}
+
+.toggle-option.active {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.location-toggle .toggle-switch {
+    width: 36px;
+    height: 20px;
+}
+
+.location-toggle .toggle-slider:before {
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+}
+
+.location-toggle .toggle-switch input:checked + .toggle-slider:before {
+    transform: translateX(16px);
+}
+
 .options-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

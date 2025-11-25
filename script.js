@@ -425,13 +425,27 @@ document.addEventListener('DOMContentLoaded', function() {
     const studentLoanInfo = document.getElementById('studentLoanInfo');
     const studentLoanText = document.getElementById('studentLoanText');
     
-    // Toggle Scotland location and update label
+    // Toggle Scotland location and highlight active option
     const scotlandCheckbox = document.getElementById('isScotland');
-    const scotlandToggleText = document.getElementById('scotlandToggleText');
-    if (scotlandCheckbox && scotlandToggleText) {
-        scotlandCheckbox.addEventListener('change', function() {
-            scotlandToggleText.textContent = this.checked ? 'Scotland' : 'England';
-        });
+    const englandLabel = document.getElementById('englandLabel');
+    const scotlandLabel = document.getElementById('scotlandLabel');
+    
+    function updateLocationLabels() {
+        if (englandLabel && scotlandLabel) {
+            if (scotlandCheckbox.checked) {
+                englandLabel.classList.remove('active');
+                scotlandLabel.classList.add('active');
+            } else {
+                englandLabel.classList.add('active');
+                scotlandLabel.classList.remove('active');
+            }
+        }
+    }
+    
+    // Set initial state
+    if (scotlandCheckbox) {
+        updateLocationLabels();
+        scotlandCheckbox.addEventListener('change', updateLocationLabels);
     }
     
     // Toggle pension inputs and update label
