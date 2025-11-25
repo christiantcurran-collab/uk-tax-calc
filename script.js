@@ -425,25 +425,35 @@ document.addEventListener('DOMContentLoaded', function() {
     const studentLoanInfo = document.getElementById('studentLoanInfo');
     const studentLoanText = document.getElementById('studentLoanText');
     
-    // Toggle pension inputs
+    // Toggle pension inputs and update label
+    const pensionToggleText = document.getElementById('pensionToggleText');
     hasPensionCheckbox.addEventListener('change', function() {
         pensionInputs.style.display = this.checked ? 'block' : 'none';
+        if (pensionToggleText) {
+            pensionToggleText.textContent = this.checked ? 'Yes' : 'No';
+        }
     });
     
-    // Toggle childcare vouchers inputs
+    // Toggle childcare vouchers inputs and update label
+    const childcareToggleText = document.getElementById('childcareToggleText');
     hasChildcareVouchersCheckbox.addEventListener('change', function() {
         childcareVouchersInputs.style.display = this.checked ? 'block' : 'none';
+        if (childcareToggleText) {
+            childcareToggleText.textContent = this.checked ? 'Yes' : 'No';
+        }
     });
     
-    // Toggle pension type (percentage vs amount)
+    // Toggle pension type (percentage vs amount) - updated for inline layout
     pensionTypeRadios.forEach(radio => {
         radio.addEventListener('change', function() {
+            const percentInput = document.querySelector('.input-with-symbol.mini:has(#pensionPercentage)') || 
+                                 document.getElementById('pensionPercentage')?.parentElement;
             if (this.value === 'percentage') {
-                pensionPercentageGroup.style.display = 'block';
+                if (percentInput) percentInput.style.display = 'flex';
                 pensionAmountGroup.style.display = 'none';
             } else {
-                pensionPercentageGroup.style.display = 'none';
-                pensionAmountGroup.style.display = 'block';
+                if (percentInput) percentInput.style.display = 'none';
+                pensionAmountGroup.style.display = 'flex';
             }
         });
     });

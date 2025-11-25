@@ -239,169 +239,148 @@
                     </div>
                 </div>
 
-                <!-- Pension Section -->
+                <!-- Additional Options Section - Compact Grid -->
                 <div class="form-section">
                     <div class="section-header">
-                        <i class="fas fa-piggy-bank section-icon"></i>
-                        <h2>Pension Contribution (Salary Sacrifice)</h2>
+                        <i class="fas fa-sliders-h section-icon"></i>
+                        <h2>Additional Options</h2>
                     </div>
                     
-                    <div class="input-group">
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="hasPension" name="hasPension">
-                            <span><i class="fas fa-hand-holding-usd"></i> I make pension contributions via salary sacrifice</span>
-                        </label>
-                    </div>
-
-                    <div id="pensionInputs" style="display: none;">
-                        <div class="input-group">
-                            <label>
-                                <i class="fas fa-calculator"></i> Contribution Type
+                    <div class="options-grid">
+                        <!-- Bonus -->
+                        <div class="option-item">
+                            <label for="bonus" class="option-label">
+                                <i class="fas fa-gift"></i> Annual Bonus
                             </label>
-                            <div class="radio-group">
-                                <label class="radio-label">
-                                    <input type="radio" name="pensionType" value="percentage" checked>
-                                    <span>
-                                        <i class="fas fa-percent"></i>
-                                        Percentage
-                                    </span>
-                                </label>
-                                <label class="radio-label">
-                                    <input type="radio" name="pensionType" value="amount">
-                                    <span>
-                                        <i class="fas fa-pound-sign"></i>
-                                        Fixed Amount
-                                    </span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="input-group" id="pensionPercentageGroup">
-                            <label for="pensionPercentage">
-                                <i class="fas fa-percent"></i> Monthly Contribution %
-                            </label>
-                            <div class="input-with-symbol">
-                                <input 
-                                    type="number" 
-                                    id="pensionPercentage" 
-                                    name="pensionPercentage" 
-                                    placeholder="e.g., 5"
-                                    min="0"
-                                    max="100"
-                                    step="0.1"
-                                    value="5"
-                                >
-                                <span class="percent-symbol">%</span>
-                            </div>
-                        </div>
-
-                        <div class="input-group" id="pensionAmountGroup" style="display: none;">
-                            <label for="pensionAmount">
-                                <i class="fas fa-pound-sign"></i> Monthly Contribution Amount
-                            </label>
-                            <div class="input-with-symbol">
+                            <div class="input-with-symbol compact">
                                 <span class="currency-symbol">£</span>
                                 <input 
                                     type="number" 
-                                    id="pensionAmount" 
-                                    name="pensionAmount" 
-                                    placeholder="e.g., 200"
+                                    id="bonus" 
+                                    name="bonus" 
+                                    placeholder="0"
                                     min="0"
                                     step="0.01"
-                                    value="200"
+                                    value="0"
                                 >
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <!-- Bonus Section -->
-                <div class="form-section">
-                    <div class="section-header">
-                        <i class="fas fa-gift section-icon"></i>
-                        <h2>Annual Bonus</h2>
-                    </div>
-                    
-                    <div class="input-group">
-                        <label for="bonus">
-                            <i class="fas fa-star"></i> Annual Bonus Amount
-                        </label>
-                        <div class="input-with-symbol">
-                            <span class="currency-symbol">£</span>
-                            <input 
-                                type="number" 
-                                id="bonus" 
-                                name="bonus" 
-                                placeholder="0"
-                                min="0"
-                                step="0.01"
-                                value="0"
-                            >
-                        </div>
-                        <p class="help-text">Bonus is taxed the same way as regular income</p>
-                    </div>
-                </div>
-
-                <!-- Childcare Vouchers Section -->
-                <div class="form-section">
-                    <div class="section-header">
-                        <i class="fas fa-child section-icon"></i>
-                        <h2>Childcare Vouchers</h2>
-                    </div>
-                    
-                    <div class="input-group">
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="hasChildcareVouchers" name="hasChildcareVouchers">
-                            <span><i class="fas fa-baby-carriage"></i> I receive childcare vouchers (salary sacrifice)</span>
-                        </label>
-                    </div>
-
-                    <div id="childcareVouchersInputs" style="display: none;">
-                        <div class="input-group">
-                            <label for="childcareVouchersAmount">
-                                <i class="fas fa-pound-sign"></i> Monthly Childcare Vouchers Amount
+                        <!-- Student Loan -->
+                        <div class="option-item">
+                            <label for="studentLoanPlan" class="option-label">
+                                <i class="fas fa-graduation-cap"></i> Student Loan
                             </label>
-                            <div class="input-with-symbol">
-                                <span class="currency-symbol">£</span>
-                                <input 
-                                    type="number" 
-                                    id="childcareVouchersAmount" 
-                                    name="childcareVouchersAmount" 
-                                    placeholder="e.g., 243"
-                                    min="0"
-                                    max="243"
-                                    step="0.01"
-                                    value="243"
-                                >
+                            <select id="studentLoanPlan" name="studentLoanPlan" class="select-input compact">
+                                <option value="none" selected>None</option>
+                                <option value="plan1">Plan 1</option>
+                                <option value="plan2">Plan 2</option>
+                                <option value="plan4">Plan 4</option>
+                                <option value="plan5">Plan 5</option>
+                                <option value="postgrad">Postgraduate</option>
+                            </select>
+                        </div>
+
+                        <!-- Pension Toggle -->
+                        <div class="option-item">
+                            <label class="option-label">
+                                <i class="fas fa-piggy-bank"></i> Pension
+                            </label>
+                            <div class="toggle-row">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="hasPension" name="hasPension">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                                <span class="toggle-label-text" id="pensionToggleText">No</span>
                             </div>
-                            <p class="help-text">Maximum: £243/month (£55/week) for basic rate taxpayers. Reduces taxable income and NI.</p>
+                        </div>
+
+                        <!-- Childcare Vouchers Toggle -->
+                        <div class="option-item">
+                            <label class="option-label">
+                                <i class="fas fa-child"></i> Childcare Vouchers
+                            </label>
+                            <div class="toggle-row">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="hasChildcareVouchers" name="hasChildcareVouchers">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                                <span class="toggle-label-text" id="childcareToggleText">No</span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Student Loan Section -->
-                <div class="form-section">
-                    <div class="section-header">
-                        <i class="fas fa-graduation-cap section-icon"></i>
-                        <h2>Student Loan</h2>
-                    </div>
-                    
-                    <div class="input-group">
-                        <label for="studentLoanPlan">
-                            <i class="fas fa-file-alt"></i> Student Loan Repayment Plan
-                        </label>
-                        <select id="studentLoanPlan" name="studentLoanPlan" class="select-input">
-                            <option value="none" selected>No Student Loan</option>
-                            <option value="plan1">Plan 1 (Before Sept 2012, England/Wales)</option>
-                            <option value="plan2">Plan 2 (Sept 2012+, England/Wales)</option>
-                            <option value="plan4">Plan 4 (Scotland)</option>
-                            <option value="plan5">Plan 5 (Aug 2023+, England/Wales)</option>
-                            <option value="postgrad">Postgraduate Loan</option>
-                        </select>
+                    <!-- Expandable Pension Details -->
+                    <div id="pensionInputs" class="expandable-options" style="display: none;">
+                        <div class="expandable-content">
+                            <div class="inline-options">
+                                <div class="inline-option">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="pensionType" value="percentage" checked>
+                                        <span>% of salary</span>
+                                    </label>
+                                    <div class="input-with-symbol mini">
+                                        <input 
+                                            type="number" 
+                                            id="pensionPercentage" 
+                                            name="pensionPercentage" 
+                                            placeholder="5"
+                                            min="0"
+                                            max="100"
+                                            step="0.1"
+                                            value="5"
+                                        >
+                                        <span class="percent-symbol">%</span>
+                                    </div>
+                                </div>
+                                <div class="inline-option">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="pensionType" value="amount">
+                                        <span>Fixed £/month</span>
+                                    </label>
+                                    <div class="input-with-symbol mini" id="pensionAmountGroup" style="display: none;">
+                                        <span class="currency-symbol">£</span>
+                                        <input 
+                                            type="number" 
+                                            id="pensionAmount" 
+                                            name="pensionAmount" 
+                                            placeholder="200"
+                                            min="0"
+                                            step="0.01"
+                                            value="200"
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div id="studentLoanInfo" style="display: none;">
-                        <div class="info-box" id="studentLoanDetails">
+                    <!-- Expandable Childcare Details -->
+                    <div id="childcareVouchersInputs" class="expandable-options" style="display: none;">
+                        <div class="expandable-content">
+                            <div class="inline-input-row">
+                                <label>Monthly amount:</label>
+                                <div class="input-with-symbol mini">
+                                    <span class="currency-symbol">£</span>
+                                    <input 
+                                        type="number" 
+                                        id="childcareVouchersAmount" 
+                                        name="childcareVouchersAmount" 
+                                        placeholder="243"
+                                        min="0"
+                                        max="243"
+                                        step="0.01"
+                                        value="243"
+                                    >
+                                </div>
+                                <span class="help-inline">Max £243/month</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Student Loan Info (hidden by default) -->
+                    <div id="studentLoanInfo" class="expandable-options" style="display: none;">
+                        <div class="info-box compact" id="studentLoanDetails">
                             <i class="fas fa-info-circle"></i>
                             <p id="studentLoanText"></p>
                         </div>
