@@ -34,22 +34,21 @@ def calculate_stamp_duty(property_price, is_first_time_buyer=False, is_additiona
 
     total_tax = 0
     band_breakdown = []
-
-    remaining_price = price
     previous_threshold = 0
 
     for band in bands:
-        if remaining_price <= 0:
-            break
-
         band_max = band['threshold']
         band_min = previous_threshold
 
+        # Only calculate if property price exceeds band minimum
+        if price <= band_min:
+            break
+
         # Calculate taxable amount in this band
-        if remaining_price > band_max:
+        if price >= band_max:
             taxable_in_band = band_max - band_min
         else:
-            taxable_in_band = remaining_price - band_min
+            taxable_in_band = price - band_min
 
         if taxable_in_band > 0:
             tax_in_band = taxable_in_band * band['rate']
@@ -62,8 +61,10 @@ def calculate_stamp_duty(property_price, is_first_time_buyer=False, is_additiona
                 'tax': tax_in_band
             })
 
-        remaining_price -= (band_max - band_min)
         previous_threshold = band_max
+
+        if price <= band_max:
+            break
 
     return {
         'property_price': property_price,
@@ -416,7 +417,7 @@ def main():
 
         print(f"Generated: {filename} - Stamp Duty: £{calculations['total_stamp_duty']:,.0f}")
 
-    print(f"\n✅ Successfully generated {len(prices)} stamp duty calculator pages!")
+    print(f"\nSuccessfully generated {len(prices)} stamp duty calculator pages!")
     print(f"Pages saved in: {output_dir}/")
     print(f"URL format: quidwise.co.uk/stamp-duty-calculator/[price]")
 
