@@ -161,7 +161,7 @@
   <!-- Blog Hub -->
   <url>
     <loc>https://www.quidwise.co.uk/blogs.html</loc>
-    <lastmod>2025-11-24</lastmod>
+    <lastmod>2026-02-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1887,6 +1887,41 @@
   </url>
 
   <!-- Blog Posts - Latest First -->
+  <url>
+    <loc>https://www.quidwise.co.uk/blog-self-employed-expenses-2026.html</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.quidwise.co.uk/blog-interest-rate-cuts-mortgages-2026.html</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.quidwise.co.uk/blog-stamp-duty-ftb-2026.html</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.quidwise.co.uk/blog-30k-salary-take-home-2026.html</loc>
+    <lastmod>2026-02-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.quidwise.co.uk/blog-tax-year-end-planning-2026.html</loc>
+    <lastmod>2026-02-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <url>
     <loc>https://www.quidwise.co.uk/blog-25k-salary-take-home.html</loc>
     <lastmod>2025-11-24</lastmod>
