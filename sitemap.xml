@@ -1888,6 +1888,27 @@
 
   <!-- Blog Posts - Latest First -->
   <url>
+    <loc>https://www.quidwise.co.uk/blog-national-insurance-guide.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.quidwise.co.uk/blog-student-loan-repayment-guide.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.quidwise.co.uk/blog-side-hustle-tax-guide.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
     <loc>https://www.quidwise.co.uk/blog-self-employed-expenses-2026.html</loc>
     <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>
