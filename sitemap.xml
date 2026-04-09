@@ -1888,6 +1888,27 @@
 
   <!-- Blog Posts - Latest First -->
   <url>
+    <loc>https://www.quidwise.co.uk/blog-renting-vs-buying-2026.html</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.quidwise.co.uk/blog-how-much-deposit-first-home.html</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.quidwise.co.uk/blog-hidden-costs-buying-house.html</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
     <loc>https://www.quidwise.co.uk/blog-national-insurance-guide.html</loc>
     <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
